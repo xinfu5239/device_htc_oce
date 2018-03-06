@@ -1668,3 +1668,8 @@ on property:sys.usb.config=diag,adb,uac2,video && property:sys.usb.configfs=0
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
+on property:vendor.usb.config=*
+   start usbd
+
+on property:persist.vendor.usb.usbradio.config=*
+   start usbd
