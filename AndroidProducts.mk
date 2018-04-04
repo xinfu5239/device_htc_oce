@@ -15,3 +15,8 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/lineage_oce.mk
+
+COMMON_LUNCH_CHOICES := \
+    lineage_oce-user \
+    lineage_oce-userdebug \
+    lineage_oce-eng
