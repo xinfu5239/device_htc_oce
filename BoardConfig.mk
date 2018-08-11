@@ -228,7 +228,6 @@ TARGET_LD_SHIM_LIBS := /system/vendor/lib64/libril.so|/system/vendor/lib64/libsh
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 # PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
-TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
 # Wifi
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
