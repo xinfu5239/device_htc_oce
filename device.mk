@@ -351,8 +351,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service.pme
+    power.msm8996
 
 # Prebuilts
 PRODUCT_COPY_FILES += \
