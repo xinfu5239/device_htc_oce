@@ -20,7 +20,7 @@
 
 #define BTM_DEF_LOCAL_NAME   "HTC U Ultra"
 
-#define BLE_VND_INCLUDED                TRUE
+//#define BLE_VND_INCLUDED                TRUE
 #define BLUETOOTH_QTI_SW                TRUE
 #define BTM_WBS_INCLUDED                FALSE
 
