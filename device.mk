@@ -18,7 +18,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/htc/pme/pme-vendor.mk)
+$(call inherit-product-if-exists, vendor/htc/oce/oce-vendor.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
@@ -28,9 +28,9 @@ DEVICE_PACKAGE_OVERLAYS += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 
-# Device was launched with M
+# Device was launched with N
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.first_api_level=23
+    ro.product.first_api_level=24
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2560
@@ -95,8 +95,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries_vendor.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
 # Adblocker
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/adblocker:system/bin/adblocker
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/prebuilt/adblocker:system/bin/adblocker
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -435,8 +435,8 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-    ipacm \
-    IPACM_cfg.xml \
+#    ipacm \
+#    IPACM_cfg.xml \
     libwpa_client \
     hostapd \
     wificond \

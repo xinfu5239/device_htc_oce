@@ -14,24 +14,14 @@
 # limitations under the License.
 #
 
-# Inherit from pme device
-$(call inherit-product, device/htc/pme/device.mk)
+# Inherit from oce device
+$(call inherit-product, device/htc/oce/device.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common aoscp stuff.
-$(call inherit-product, vendor/aoscp/configs/common_full_phone.mk)
+# Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := oce
+PRODUCT_NAME := full_oce
 
-## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := pme
-PRODUCT_NAME := aoscp_pme
-PRODUCT_BRAND := HTC
-PRODUCT_MODEL := HTC 10
-PRODUCT_MANUFACTURER := HTC
-PRODUCT_RELEASE_NAME := pme
-
-$(call inherit-product-if-exists, vendor/htc/pme/pme-vendor.mk)
-
-# Device Fingerprint
-BUILD_FINGERPRINT := htc/pmeuhl_00401/htc_pmeuhl:8.0.0/OPR1.170623.027/1012001.2:user/release-keys
+$(call inherit-product-if-exists, vendor/htc/oce/oce-vendor.mk)

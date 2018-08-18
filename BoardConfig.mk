@@ -17,10 +17,10 @@
 
 BOARD_VENDOR := htc
 
-DEVICE_PATH := device/htc/pme
+DEVICE_PATH := device/htc/oce
 
 # Asserts
-TARGET_OTA_ASSERT_DEVICE := pme,pmeuhl,pmewhl,pmewl,pmeul,htc_pmeuhl,htc_pmewhl,htc_pmewl,htc_pmeul
+TARGET_OTA_ASSERT_DEVICE := oce,ocedugl,htc_ocedugl
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8996
@@ -57,11 +57,11 @@ BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_KERNEL_TAGS_OFFSET := 0x02000000
-BOARD_RAMDISK_OFFSET     := 0x02200000
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_RAMDISK_OFFSET     := 0x01000000
 TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_SOURCE := kernel/htc/msm8996
-TARGET_KERNEL_CONFIG := pme_defconfig
+TARGET_KERNEL_SOURCE := kernel/htc/oce
+TARGET_KERNEL_CONFIG := oce_defconfig
 
 # Audio
 #AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD := true
@@ -159,8 +159,8 @@ HWUI_COMPILE_FOR_PERF := true
 
 # Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_INIT_VENDOR_LIB := libinit_pme
-TARGET_RECOVERY_DEVICE_MODULES := libinit_pme
+TARGET_INIT_VENDOR_LIB := libinit_oce
+TARGET_RECOVERY_DEVICE_MODULES := libinit_oce
 
 # Keymaster
 TARGET_PROVIDES_KEYMASTER := true
@@ -181,8 +181,8 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3640655872
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 26323451904
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3791650816
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 469762048
 TARGET_USES_MKE2FS := true
 
 # Qualcomm
@@ -225,4 +225,4 @@ WIFI_DRIVER_FW_PATH_P2P     := "/vendor/firmware/fw_bcm4359.bin"
 WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcm4359.bin"
 
 # inherit from the proprietary version
--include vendor/htc/pme/BoardConfigVendor.mk
+-include vendor/htc/oce/BoardConfigVendor.mk
