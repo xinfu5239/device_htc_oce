@@ -1,7 +1,7 @@
 [WIP] Device Tree for HTC U Ultra Dual Sim(oce)
 ===========================================
 
-The HTC U Ultra (codenamed _"pme"_) is a flagship smartphone from HTC.
+The HTC U Ultra (codenamed _"oce"_) is a flagship smartphone from HTC.
 It was released in February 2017.
 
 Basic   | Spec Sheet
