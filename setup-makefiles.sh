@@ -18,10 +18,10 @@
 
 set -e
 
-DEVICE=pme
+DEVICE=oce
 VENDOR=htc
 
-INITIAL_COPYRIGHT_YEAR=2016
+INITIAL_COPYRIGHT_YEAR=2018
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
@@ -29,7 +29,7 @@ if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
 CM_ROOT="$MY_DIR"/../../..
 
-HELPER="$CM_ROOT"/vendor/lineage/build/tools/extract_utils.sh
+HELPER="$CM_ROOT"/vendor/rr/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
