@@ -59,10 +59,42 @@ void vendor_load_properties()
         /* Dual SIM Dual Netcom UHL Europe Africa Asia (OCE_DUGL) */
         property_set("ro.build.product", "htc_ocedugl");
         property_set("ro.product.model", "HTC_U-1u");
+		property_set("ro.ril.enable.pre_r8fd", "1");
+		property_set("ro.ril.hsxpa", "5");
+		property_set("ro.ril.hsdpa.category", "24");
+		property_set("ro.ril.hsupa.category", "6");
+		property_set("ro.ril.disable.cpc", "0");
+		property_set("persist.rild.nitz_plmn", "");
+		property_set("persist.rild.nitz_long_ons_0");
+		property_set("persist.rild.nitz_long_ons_1");
+		property_set("persist.rild.nitz_long_ons_2", "");
+		property_set("persist.rild.nitz_long_ons_3", "");
+		property_set("persist.rild.nitz_short_ons_0", "");
+		property_set("persist.rild.nitz_short_ons_1", "");
+		property_set("persist.rild.nitz_short_ons_2", "");
+		property_set("persist.rild.nitz_short_ons_3", "");
+		property_set("ril.subscription.types", "NV,RUIM");
+		property_set("telephony.lteOnCdmaDevice", "1");
     } else if (strstr(bootmid, "2PZF30000")) {
         /* Dual card full Netcom UHL China (OCE_DUGL) */
         property_set("ro.build.product", "htc_ocedugl");
         property_set("ro.product.model", "HTC_U-1w");
+		property_set("ro.ril.enable.pre_r8fd", "1");
+		property_set("ro.ril.hsxpa", "5");
+		property_set("ro.ril.hsdpa.category", "24");
+		property_set("ro.ril.hsupa.category", "6");
+		property_set("ro.ril.disable.cpc", "0");
+		property_set("persist.rild.nitz_plmn", "");
+		property_set("persist.rild.nitz_long_ons_0");
+		property_set("persist.rild.nitz_long_ons_1");
+		property_set("persist.rild.nitz_long_ons_2", "");
+		property_set("persist.rild.nitz_long_ons_3", "");
+		property_set("persist.rild.nitz_short_ons_0", "");
+		property_set("persist.rild.nitz_short_ons_1", "");
+		property_set("persist.rild.nitz_short_ons_2", "");
+		property_set("persist.rild.nitz_short_ons_3", "");
+		property_set("ril.subscription.types", "NV,RUIM");
+		property_set("telephony.lteOnCdmaDevice", "1");
     } else {
         /* GSM (OCE_UL) */
         property_set("ro.build.product", "htc_oceul");

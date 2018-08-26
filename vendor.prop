@@ -1,5 +1,5 @@
 # Audio
-af.fast_track_multiplier=1
+af.fast_track_multiplier=2
 av.offload.enable=false
 audio.offload.disable=true
 audio.offload.video=false
