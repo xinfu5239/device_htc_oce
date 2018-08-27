@@ -22,8 +22,8 @@ $(call inherit-product-if-exists, vendor/htc/oce/oce-vendor.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage \
-    $(LOCAL_PATH)/overlay
+    $(LOCAL_PATH)/overlay \
+    $(LOCAL_PATH)/overlay-lineage
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
@@ -94,10 +94,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries_system.txt:system/etc/public.libraries.txt \
     $(LOCAL_PATH)/configs/public.libraries_vendor.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
-
-# Adblocker
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/prebuilt/adblocker:system/bin/adblocker
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -170,8 +166,8 @@ PRODUCT_PACKAGES += \
     services-ext
 
 # Device Settings
-PRODUCT_PACKAGES += \
-    DeviceSettings
+#PRODUCT_PACKAGES += \
+#    DeviceSettings
 
 # Display
 PRODUCT_PACKAGES += \
@@ -228,8 +224,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
-    $(LOCAL_PATH)/gps/etc/gps.conf.default:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf.default \
-    $(LOCAL_PATH)/gps/etc/gps.conf.sprint:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf.sprint \
+    $(LOCAL_PATH)/gps/etc/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf \
     $(LOCAL_PATH)/gps/etc/izat.conf:$(TARGET_COPY_OUT_VENDOR)/etc/izat.conf \
     $(LOCAL_PATH)/gps/etc/lowi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/lowi.conf \
     $(LOCAL_PATH)/gps/etc/sap.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sap.conf \
@@ -255,8 +250,11 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.power.rc \
     init.qcom.usb.rc \
+    init.htc_multisim.rc \
+    init.htc_oce_fp.rc \
     init.qcom.usb.sh \
     init.qcom.sh \
+    init.htc.fp.sh \
     init.qcom.firmware_links.sh \
     init.recovery.qcom.rc \
     init.target.rc \
@@ -264,13 +262,14 @@ PRODUCT_PACKAGES += \
 
 # Input
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/idc/synaptics_dsx.idc:system/usr/idc/synaptics_dsx.idc
+    $(LOCAL_PATH)/configs/idc/hsml_touchscreen.idc:system/usr/idc/hsml_touchscreen.idc \
+    $(LOCAL_PATH)/configs/idc/siw_touch_input.idc:system/usr/idc/siw_touch_input.idc
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/AK8789_HALL_SENSOR.kl:system/usr/keylayout/AK8789_HALL_SENSOR.kl \
     $(LOCAL_PATH)/keylayout/fpc1020.kl:system/usr/keylayout/fpc1020.kl \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    $(LOCAL_PATH)/keylayout/cypress-cap-sensor.kl:system/usr/keylayout/cypress-cap-sensor.kl
+    $(LOCAL_PATH)/keylayout/himax-touchscreen-cap.kl:system/usr/keylayout/himax-touchscreen-cap.kl
 
 # IPv6
 PRODUCT_PACKAGES += \
@@ -290,7 +289,7 @@ PRODUCT_PACKAGES += \
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service.pme
+    android.hardware.light@2.0-service.oce
 
 # LiveDisplay native
 PRODUCT_PACKAGES += \
@@ -437,8 +436,8 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
 # Variant linking script
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/releasetools/variants.sh:install/bin/variants.sh
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/releasetools/variants.sh:install/bin/variants.sh
 
 # Vibrator
 PRODUCT_PACKAGES += \
@@ -456,8 +455,8 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-#    ipacm \
-#    IPACM_cfg.xml \
+    ipacm \
+    IPACM_cfg.xml \
     libwpa_client \
     hostapd \
     wificond \

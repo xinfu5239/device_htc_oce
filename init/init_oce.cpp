@@ -28,28 +28,32 @@
  */
 
 #include <stdlib.h>
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <sys/_system_properties.h>
 
-#include "vendor_init.h"
+#include <android-base/properties.h>
+#include <android-base/logging.h>
+
 #include "property_service.h"
-#include "log.h"
-//#include "util.h"
+#include "vendor_init.h"
 
-#include "init_htcCommon.h"
+using android::base::GetProperty;
+using android::init::property_set;
 
 void vendor_load_properties()
 {
-    char platform[PROP_VALUE_MAX];
+    std::string platform;
     char bootmid[PROP_VALUE_MAX];
     char bootcid[PROP_VALUE_MAX];
     char device[PROP_VALUE_MAX];
     int rc;
 
-    rc = property_get_sdk23("ro.board.platform", platform);
-    if (!rc || strncmp(platform, ANDROID_TARGET, PROP_VALUE_MAX))
+    platform = GetProperty("ro.board.platform", "");
+    if (platform != ANDROID_TARGET)
         return;
 
-    property_get_sdk23("ro.boot.mid", bootmid);
-    property_get_sdk23("ro.boot.cid", bootcid);
+    GetProperty("ro.boot.mid", bootmid);
+    GetProperty("ro.boot.cid", bootcid);
 
     if (strstr(bootmid, "2PZF10000")) {
         /* Europe (OCE_UHL) */
@@ -65,8 +69,8 @@ void vendor_load_properties()
 		property_set("ro.ril.hsupa.category", "6");
 		property_set("ro.ril.disable.cpc", "0");
 		property_set("persist.rild.nitz_plmn", "");
-		property_set("persist.rild.nitz_long_ons_0");
-		property_set("persist.rild.nitz_long_ons_1");
+		property_set("persist.rild.nitz_long_ons_0", "");
+		property_set("persist.rild.nitz_long_ons_1", "");
 		property_set("persist.rild.nitz_long_ons_2", "");
 		property_set("persist.rild.nitz_long_ons_3", "");
 		property_set("persist.rild.nitz_short_ons_0", "");
@@ -85,8 +89,8 @@ void vendor_load_properties()
 		property_set("ro.ril.hsupa.category", "6");
 		property_set("ro.ril.disable.cpc", "0");
 		property_set("persist.rild.nitz_plmn", "");
-		property_set("persist.rild.nitz_long_ons_0");
-		property_set("persist.rild.nitz_long_ons_1");
+		property_set("persist.rild.nitz_long_ons_0", "");
+		property_set("persist.rild.nitz_long_ons_1", "");
 		property_set("persist.rild.nitz_long_ons_2", "");
 		property_set("persist.rild.nitz_long_ons_3", "");
 		property_set("persist.rild.nitz_short_ons_0", "");
@@ -101,8 +105,8 @@ void vendor_load_properties()
         property_set("ro.product.model", "HTC U Ultra");
     }
 
-    set_props_from_build();
+    //set_props_from_build();
 
-    property_get_sdk23("ro.product.device", device);
-    ERROR("Found bootmid %s setting build properties for %s device\n", bootmid, device);
+    GetProperty("ro.product.device", device);
+    LOG(ERROR) << "Found bootmid %s setting build properties for %s device\n" << bootmid << device;
 }

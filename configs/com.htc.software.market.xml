@@ -17,7 +17,8 @@
 <permissions>
     <feature name="com.htc.software.HTC" />
     <feature name="com.htc.software.GPSense" />
-    <feature name="com.htc.software.HtcSense8.0" />
-    <feature name="com.htc.software.PMEUHL" />
+    <feature name="com.htc.software.OceanNoteDUGL" />
     <feature name="com.htc.software.IHSense" />
+    <feature name="com.htc.software.seconddisplay.alwayson" />
+    <feature name="com.htc.software.screencapture" />
 </permissions>
