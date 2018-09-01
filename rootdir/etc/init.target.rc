@@ -42,9 +42,8 @@ on early-init
     chown system system /firmware/image
     mkdir /firmware/adsp 0771 system system
     mkdir /firmware/radio 0771 system system
-    mkdir /firmware/slpi 0771 system system
     mkdir /firmware/venus 0771 system system
-    mkdir /firmware/wsd 0500 oem_2903 oem_2903
+    mkdir /firmware/wsd 0500 rfs rfs
 
     # Link /vendor to /system/vendor for devices without a vendor partition.
     symlink /system/vendor /vendor
@@ -359,7 +358,7 @@ on fs
 
     # Add rfg_3 mounting from stock. This way we will still boot if partition doesn't actually exist on the device.
     wait /dev/block/bootdevice/by-name/rfg_3
-    mount vfat /dev/block/bootdevice/by-name/rfg_3 /firmware/wsd ro shortname=lower,uid=3012,gid=3012,dmask=277,fmask=377
+    mount vfat /dev/block/bootdevice/by-name/rfg_3 /firmware/wsd ro shortname=lower,uid=2951,gid=2951,dmask=277,fmask=377
 
     # Mount cradio image
     mkdir /firmware/cradio 0771 system system
@@ -376,7 +375,7 @@ on fs
     setprop ro.boot.firmware.cpe 1
 
     # HTC feature: Support multiple firmware image mount points
-    write /sys/module/firmware_class/parameters/fw_path /firmware/image,/firmware/adsp,/firmware/radio,/firmware/slpi,/firmware/venus,/firmware/wsd,/vendor/firmware
+    write /sys/module/firmware_class/parameters/fw_path /firmware/image,/firmware/adsp,/firmware/radio,/firmware/venus,/firmware/wsd,/vendor/firmware
 
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
@@ -387,13 +386,13 @@ on property:init.svc.bootanim=running
 
 # Services begin here
 # Firmware linking to /firmware/image
-service fwnk-adsp  /system/bin/sh /init.qcom.firmware_links.sh /firmware/adsp /firmware/image "adsp*" adsp
-    class firmware-link
-    oneshot
+#service fwnk-adsp  /system/bin/sh /init.qcom.firmware_links.sh /firmware/adsp /firmware/image "adsp*" adsp
+#    class firmware-link
+#    oneshot
 
-service fwnk-cpe  /system/bin/sh /init.qcom.firmware_links.sh /firmware/adsp /firmware/image "cpe*" cpe
-    class firmware-link
-    oneshot
+#service fwnk-cpe  /system/bin/sh /init.qcom.firmware_links.sh /firmware/adsp /firmware/image "cpe*" cpe
+#    class firmware-link
+#    oneshot
 
 service fwnk-radio /system/bin/sh /init.qcom.firmware_links.sh /firmware/radio /firmware/image "modem* mba* radiover* version* qdsp6m* msadp*" radio
     class firmware-link
@@ -403,7 +402,7 @@ service fwnk-sec  /system/bin/sh /init.qcom.firmware_links.sh /system/etc/firmwa
     class firmware-link
     oneshot
 
-service fwnk-venus /system/bin/sh /init.qcom.firmware_links.sh /firmware/venus /firmware/image "venus*" venus
-    class firmware-link
-    oneshot
+#service fwnk-venus /system/bin/sh /init.qcom.firmware_links.sh /firmware/venus /firmware/image "venus*" venus
+#    class firmware-link
+#    oneshot
 
