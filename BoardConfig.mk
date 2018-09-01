@@ -54,7 +54,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff printk.devkmsg=on androidboot.hardware=htc_oce androidkey.dummy=1 androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -109,10 +109,10 @@ TARGET_CAMERASERVICE_CLOSES_NATIVE_HANDLES := true
 
 # CPU
 ENABLE_CPUSETS := true
-ENABLE_SCHEDBOOST := true
-TARGET_PROVIDES_POWERHAL := true
-TARGET_POWERHAL_VARIANT := voxpopuli
-TARGET_USES_INTERACTION_BOOST := false
+TARGET_HAS_LEGACY_POWER_STATS := true
+TARGET_HAS_NO_WIFI_STATS := true
+TARGET_USES_INTERACTION_BOOST := true
+
 
 # Dex
 ifeq ($(HOST_OS),linux)
@@ -202,9 +202,6 @@ BOARD_USES_QCOM_HARDWARE := true
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.full
 TARGET_USERIMAGES_USE_EXT4 := true
-
-# Release
-# TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)/releasetools
 
 # RIL
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true

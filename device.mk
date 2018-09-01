@@ -269,6 +269,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/AK8789_HALL_SENSOR.kl:system/usr/keylayout/AK8789_HALL_SENSOR.kl \
     $(LOCAL_PATH)/keylayout/fpc1020.kl:system/usr/keylayout/fpc1020.kl \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/keylayout/siw_touch_input.kl:system/usr/keylayout/siw_touch_input.kl \
     $(LOCAL_PATH)/keylayout/himax-touchscreen-cap.kl:system/usr/keylayout/himax-touchscreen-cap.kl
 
 # IPv6
@@ -350,17 +351,11 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service \
-    power.msm8996
+    android.hardware.power@1.0-service-qti
 
 # Prebuilts
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/org.apache.http.legacy.jar:system/framework/org.apache.http.legacy.jar
-
-# Properties
-PRODUCT_PACKAGES += \
-    operator-properties
 
 # QMI
 PRODUCT_PACKAGES += \
@@ -426,18 +421,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.thermal@1.0-impl \
     android.hardware.thermal@1.0-service \
-    thermal.pme
+    thermal.msm8996
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
+    $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-8996.conf
 
 # USB HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
-
-# Variant linking script
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/releasetools/variants.sh:install/bin/variants.sh
 
 # Vibrator
 PRODUCT_PACKAGES += \

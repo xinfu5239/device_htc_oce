@@ -59,6 +59,22 @@ void vendor_load_properties()
         /* Europe (OCE_UHL) */
         property_set("ro.build.product", "htc_oceuhl");
         property_set("ro.product.model", "HTC U Ultra");
+        property_set("ro.ril.enable.pre_r8fd", "1");
+        property_set("ro.ril.hsxpa", "4");
+        property_set("ro.ril.hsdpa.category", "24");
+        property_set("ro.ril.hsupa.category", "6");
+        property_set("ro.ril.disable.cpc", "0");
+        property_set("persist.rild.nitz_plmn", "");
+        property_set("persist.rild.nitz_long_ons_0", "");
+        property_set("persist.rild.nitz_long_ons_1", "");
+        property_set("persist.rild.nitz_long_ons_2", "");
+        property_set("persist.rild.nitz_long_ons_3", "");
+        property_set("persist.rild.nitz_short_ons_0", "");
+        property_set("persist.rild.nitz_short_ons_1", "");
+        property_set("persist.rild.nitz_short_ons_2", "");
+        property_set("persist.rild.nitz_short_ons_3", "");
+        property_set("ril.subscription.types", "NV,RUIM");
+        property_set("telephony.lteOnCdmaDevice", "1");
     } else if (strstr(bootmid, "2PZF20000")) {
         /* Dual SIM Dual Netcom UHL Europe Africa Asia (OCE_DUGL) */
         property_set("ro.build.product", "htc_ocedugl");
