@@ -256,6 +256,7 @@ PRODUCT_PACKAGES += \
     init.qcom.sh \
     init.htc.fp.sh \
     init.qcom.firmware_links.sh \
+    loggy.sh \
     init.recovery.qcom.rc \
     init.target.rc \
     ueventd.qcom.rc
@@ -290,7 +291,7 @@ PRODUCT_PACKAGES += \
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service.oce
+    android.hardware.light@2.0-service
 
 # LiveDisplay native
 PRODUCT_PACKAGES += \
@@ -397,7 +398,8 @@ PRODUCT_COPY_FILES += \
 # Sensors
 PRODUCT_PACKAGES += \
     libsensorndkbridge \
-    android.hardware.sensors@1.0-impl
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service
 
 # Tethering
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -446,8 +448,8 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-#    ipacm \
-#    IPACM_cfg.xml \
+    ipacm \
+    IPACM_cfg.xml \
     libwpa_client \
     hostapd \
     wificond \

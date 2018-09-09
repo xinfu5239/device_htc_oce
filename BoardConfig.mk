@@ -54,7 +54,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff printk.devkmsg=on androidboot.hardware=htc_oce androidkey.dummy=1 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff printk.devkmsg=on androidboot.hardware=qcom androidkey.dummy=1 androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -145,7 +145,7 @@ BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
 TARGET_PER_MGR_ENABLED := true
 
 # Encryption
-TARGET_HW_DISK_ENCRYPTION := true
+# TARGET_HW_DISK_ENCRYPTION := true
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
@@ -165,9 +165,9 @@ DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
 HWUI_COMPILE_FOR_PERF := true
 
 # Init
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_INIT_VENDOR_LIB := libinit_oce
-TARGET_RECOVERY_DEVICE_MODULES := libinit_oce
+# TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
+# TARGET_INIT_VENDOR_LIB := libinit_oce
+# TARGET_RECOVERY_DEVICE_MODULES := libinit_oce
 
 # Keymaster
 TARGET_PROVIDES_KEYMASTER := true

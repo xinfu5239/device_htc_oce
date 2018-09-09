@@ -504,18 +504,18 @@ service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     user root
     oneshot
 
-#service ipacm-diag /system/vendor/bin/ipacm-diag
-#    class main
-#    user radio
-#    socket ipacm_log_file dgram 660 radio radio
-#    group radio diag oem_2901
-#    disabled
+service ipacm-diag /system/vendor/bin/ipacm-diag
+    class main
+    user radio
+    socket ipacm_log_file dgram 660 radio radio
+    group radio diag oem_2901
+    disabled
 
-#service ipacm /system/vendor/bin/ipacm
-#    class main
-#    user radio
-#    group radio inet
-#    disabled
+service ipacm /system/vendor/bin/ipacm
+    class main
+    user radio
+    group radio inet
+    disabled
 
 service loc_launcher /vendor/bin/loc_launcher
     # loc_launcher will start as root and set its uid to gps
@@ -657,6 +657,11 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     class late_start
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
+    oneshot
+
+service loggy /system/bin/sh /loggy.sh
+    class main
+    user root
     oneshot
 
 on property:gsm.sim.operator.numeric=*
