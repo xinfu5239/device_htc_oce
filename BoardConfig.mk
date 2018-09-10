@@ -64,6 +64,8 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/htc/oce
 TARGET_KERNEL_CONFIG := oce_defconfig
 
+BOARD_ROOT_EXTRA_FOLDERS := bt_firmware crashdump.d dsp firmware persist
+
 # Audio
 #AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD := true
 AUDIO_FEATURE_ENABLED_ACDB_LICENSE := true
