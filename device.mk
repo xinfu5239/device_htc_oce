@@ -257,6 +257,7 @@ PRODUCT_PACKAGES += \
     init.htc.fp.sh \
     init.qcom.firmware_links.sh \
     loggy.sh \
+    init.usbdiag.sh \
     init.recovery.qcom.rc \
     init.target.rc \
     ueventd.qcom.rc
@@ -291,7 +292,7 @@ PRODUCT_PACKAGES += \
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service
+    android.hardware.light@2.0-service.oce
 
 # LiveDisplay native
 PRODUCT_PACKAGES += \
@@ -364,10 +365,10 @@ PRODUCT_PACKAGES += \
 
 # Qualcomm
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/privapp-permissions-htchep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/privapp-permissions-htchep.xml \
-    $(LOCAL_PATH)/configs/privapp-permissions-htcshep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/privapp-permissions-htcshep.xml \
-    $(LOCAL_PATH)/configs/privapp-permissions-oem.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/privapp-permissions-oem.xml \
-    $(LOCAL_PATH)/configs/qti_whitelist.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/qti_whitelist.xml
+    $(LOCAL_PATH)/configs/privapp-permissions-htchep.xml:system/etc/permissions/privapp-permissions-htchep.xml \
+    $(LOCAL_PATH)/configs/privapp-permissions-htcshep.xml:system/etc/permissions/privapp-permissions-htcshep.xml \
+    $(LOCAL_PATH)/configs/privapp-permissions-oem.xml:system/etc/permissions/privapp-permissions-oem.xml \
+    $(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
 
 # RCS
 PRODUCT_PACKAGES += \
@@ -398,8 +399,7 @@ PRODUCT_COPY_FILES += \
 # Sensors
 PRODUCT_PACKAGES += \
     libsensorndkbridge \
-    android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service
+    android.hardware.sensors@1.0-impl
 
 # Tethering
 PRODUCT_PROPERTY_OVERRIDES += \

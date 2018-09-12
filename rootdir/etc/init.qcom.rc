@@ -44,6 +44,7 @@ on init
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
+    symlink /storage/ext_sd /sdcard2
 
     # Create cgroup mount point for memory
     mkdir /sys/fs/cgroup/memory/bg 0750 root system
@@ -331,7 +332,33 @@ on post-fs-data
     chown system system /sys/devices/platform/msm_sdcc.4/polling
 
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
+
+    # Create all remaining /data root dirs so that they are made through init
+    # and get proper encryption policy installed
+    mkdir /data/backup 0700 system system
+    mkdir /data/ss 0700 system system
+
     mkdir /data/system 0775 system system
+    mkdir /data/system/heapdump 0700 system system
+    mkdir /data/system/users 0775 system system
+
+    mkdir /data/system_de 0770 system system
+    mkdir /data/system_ce 0770 system system
+
+    mkdir /data/misc_de 01771 system misc
+    mkdir /data/misc_ce 01771 system misc
+
+    mkdir /data/user 0711 system system
+    mkdir /data/user_de 0711 system system
+    symlink /data/data /data/user/0
+
+    mkdir /data/media 0770 media_rw media_rw
+    mkdir /data/media/obb 0770 media_rw media_rw
+
+    mkdir /data/cache 0770 system cache
+    mkdir /data/cache/recovery 0770 system cache
+    mkdir /data/cache/backup_stage 0700 system system
+    mkdir /data/cache/backup 0700 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
     #Create directories for Location services
@@ -606,25 +633,16 @@ service rmt_storage /vendor/bin/rmt_storage
     ioprio rt 0
     writepid /dev/cpuset/system-background/tasks
 
-#service loggy /system/bin/sh /loggy.sh
-#    class main
-#    user root
-#    oneshot
-
 service sensors /vendor/bin/sensors.qcom
     class core
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
 
-service thermal-engine /vendor/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
    class main
    user root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
-   socket thermal-send-rule stream 0660 system system
-   group root
+   group root system
    socket thermal-send-client stream 0666 system system
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
@@ -645,21 +663,13 @@ service time_daemon /vendor/bin/time_daemon
     group root
     writepid /dev/cpuset/system-background/tasks
 
-service trustonic-daemon /vendor/bin/mcDriverDaemon -b
-    class core
-    user system
-    group system
-    oneshot
-    writepid /dev/cpuset/system-background/tasks
-    disabled
-
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/vendor/etc/wifi/wpa_supplicant_overlay.conf \
     -puse_p2p_group_interface=1p2p_device=1 \
     -m/data/misc/wifi/p2p_supplicant.conf \
-    -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
-    class late_start
+    -g@android:wpa_wlan0
+    class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot

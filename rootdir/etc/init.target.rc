@@ -42,11 +42,17 @@ on early-init
     chown system system /firmware/image
     mkdir /firmware/adsp 0771 system system
     mkdir /firmware/radio 0771 system system
+    mkdir /firmware/slpi 0771 system system
     mkdir /firmware/venus 0771 system system
-    mkdir /firmware/wsd 0500 rfs rfs
+    mkdir /firmware/wsd 0500 oem_2903 oem_2903
 
     # Link /vendor to /system/vendor for devices without a vendor partition.
     symlink /system/vendor /vendor
+
+on init
+    # QSEE rpmb listener need symlink for bootdevice
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
 on early-boot
     # SSR setup
@@ -216,13 +222,13 @@ on boot
     chown system system /sys/devices/virtual/htc_sensorhub/sensor_hub/hall_sensor
     chown system system /sys/devices/virtual/htc_sensorhub/sensor_hub/sensor_hub_rdata
     chown system system /sys/devices/virtual/htc_sensorhub/sensor_hub/facedown_enabled
-    chown system gesture_motion /sys/class/htc_sensorhub/sensor_hub/gesture_motion
-    chown system system /sys/class/htc_sensorhub/sensor_hub/mcu_wakeup
-    chown system system /sys/class/htc_sensorhub/sensor_hub/dbg_flag
-    chown system gesture_motion /sys/class/htc_sensorhub/sensor_hub/edge_thd
-    chown system gesture_motion /sys/android_edge/hw_version
+    chown system system /sys/devices/virtual/htc_sensorhub/sensor_hub/gesture_motion
+    chown system system /sys/devices/virtual/htc_sensorhub/sensor_hub/mcu_wakeup
+    chown system system /sys/devices/virtual/htc_sensorhub/sensor_hub/dbg_flag
+    chown system system /sys/devices/virtual/htc_sensorhub/sensor_hub/edge_thd
+    chown system system /sys/android_edge/hw_version
     chown system system /sys/android_edge/gadc
-    chown system system /sys/class/htc_sensorhub/sensor_hub/vbus_time
+    chown system system /sys/devices/virtual/htc_sensorhub/sensor_hub/vbus_time
     chown system system /sys/devices/virtual/htc_sensorhub/sensor_hub/vibrate_ms
 
     chmod 664 /sys/devices/virtual/htc_sensorhub/sensor_hub/ap_calibrator_data_acc_rl
@@ -254,14 +260,14 @@ on boot
     chmod 664 /sys/devices/virtual/htc_sensorhub/sensor_hub/hall_sensor
     chmod 664 /sys/devices/virtual/htc_sensorhub/sensor_hub/sensor_hub_rdata
     chmod 664 /sys/devices/virtual/htc_sensorhub/sensor_hub/facedown_enabled
-    chmod 664 /sys/class/htc_sensorhub/sensor_hub/gesture_motion
-    chmod 664 /sys/class/htc_sensorhub/sensor_hub/mcu_wakeup
-    chmod 664 /sys/class/htc_sensorhub/sensor_hub/dbg_flag
-    chmod 664 /sys/class/htc_sensorhub/sensor_hub/edge_thd
+    chmod 664 /sys/devices/virtual/htc_sensorhub/sensor_hub/gesture_motion
+    chmod 664 /sys/devices/virtual/htc_sensorhub/sensor_hub/mcu_wakeup
+    chmod 664 /sys/devices/virtual/htc_sensorhub/sensor_hub/dbg_flag
+    chmod 664 /sys/devices/virtual/htc_sensorhub/sensor_hub/edge_thd
     chmod 664 /sys/android_edge/hw_version
     chmod 664 /sys/android_edge/gadc
-    chmod 440 /sys/class/htc_sensorhub/sensor_hub/vbus_time
-    chmod 660 /sys/class/htc_sensorhub/sensor_hub/vibrate_ms
+    chmod 440 /sys/devices/virtual/htc_sensorhub/sensor_hub/vbus_time
+    chmod 660 /sys/devices/virtual/htc_sensorhub/sensor_hub/vibrate_ms
 
     # G-Sensor Calibration USER
     chown system system /sys/class/htc_g_sensor/g_sensor/g_sensor_user_offset
@@ -352,13 +358,11 @@ on post-fs-data
     chmod 0664 /persist/sensors/sns.reg
 
 on fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all /vendor/etc/fstab.qcom
 
     # Add rfg_3 mounting from stock. This way we will still boot if partition doesn't actually exist on the device.
     wait /dev/block/bootdevice/by-name/rfg_3
-    mount vfat /dev/block/bootdevice/by-name/rfg_3 /firmware/wsd ro shortname=lower,uid=2951,gid=2951,dmask=277,fmask=377
+    mount vfat /dev/block/bootdevice/by-name/rfg_3 /firmware/wsd ro shortname=lower,uid=3012,gid=3012,dmask=277,fmask=377
 
     # Mount cradio image
     #mkdir /firmware/cradio 0771 system system
@@ -375,7 +379,7 @@ on fs
     setprop ro.boot.firmware.cpe 1
 
     # HTC feature: Support multiple firmware image mount points
-    write /sys/module/firmware_class/parameters/fw_path /firmware/image,/firmware/adsp,/firmware/radio,/firmware/venus,/firmware/wsd,/vendor/firmware
+    write /sys/module/firmware_class/parameters/fw_path /firmware/image,/firmware/adsp,/firmware/radio,/firmware/slpi,/firmware/venus,/firmware/wsd,/vendor/firmware
 
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
@@ -390,16 +394,20 @@ on property:init.svc.bootanim=running
 service fwnk-adsp  /system/bin/sh /init.qcom.firmware_links.sh /firmware/adsp /firmware/image "adsp*" adsp
     class firmware-link
     oneshot
- service fwnk-cpe  /system/bin/sh /init.qcom.firmware_links.sh /firmware/adsp /firmware/image "cpe*" cpe
+
+service fwnk-cpe  /system/bin/sh /init.qcom.firmware_links.sh /firmware/adsp /firmware/image "cpe*" cpe
     class firmware-link
     oneshot
- service fwnk-radio /system/bin/sh /init.qcom.firmware_links.sh /firmware/radio /firmware/image "modem* mba* radiover* version* qdsp6m* msadp*" radio
+
+service fwnk-radio /system/bin/sh /init.qcom.firmware_links.sh /firmware/radio /firmware/image "modem* mba* radiover* version* qdsp6m* msadp*" radio
     class firmware-link
     oneshot
- service fwnk-sec  /system/bin/sh /init.qcom.firmware_links.sh /system/etc/firmware /firmware/image "keymaste* gpta*" sec
+
+service fwnk-sec  /system/bin/sh /init.qcom.firmware_links.sh /system/etc/firmware /firmware/image "keymaste* gpta*" sec
     class firmware-link
     oneshot
- service fwnk-venus /system/bin/sh /init.qcom.firmware_links.sh /firmware/venus /firmware/image "venus*" venus
+
+service fwnk-venus /system/bin/sh /init.qcom.firmware_links.sh /firmware/venus /firmware/image "venus*" venus
     class firmware-link
     oneshot
 
@@ -408,3 +416,6 @@ service loggy /system/bin/sh /loggy.sh
     user root
     oneshot
     disabled
+
+service usbdiag_init /vendor/bin/init.usbdiag.sh
+    class main

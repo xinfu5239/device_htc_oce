@@ -40,6 +40,17 @@
 using android::base::GetProperty;
 using android::init::property_set;
 
+void property_override(char const prop[], char const value[])
+{
+    prop_info *pi;
+    
+    pi = (prop_info*) __system_property_find(prop);
+    if (pi)
+    __system_property_update(pi, value, strlen(value));
+    else
+    __system_property_add(prop, strlen(prop), value, strlen(value));
+}
+
 void vendor_load_properties()
 {
     std::string platform;
@@ -57,8 +68,8 @@ void vendor_load_properties()
 
     if (strstr(bootmid, "2PZF10000")) {
         /* Europe (OCE_UHL) */
-        property_set("ro.build.product", "htc_oceuhl");
-        property_set("ro.product.model", "HTC U Ultra");
+        property_override("ro.build.product", "htc_oceuhl");
+        property_override("ro.product.model", "HTC U Ultra");
         property_set("ro.ril.enable.pre_r8fd", "1");
         property_set("ro.ril.hsxpa", "4");
         property_set("ro.ril.hsdpa.category", "24");
@@ -77,28 +88,29 @@ void vendor_load_properties()
         property_set("telephony.lteOnCdmaDevice", "1");
     } else if (strstr(bootmid, "2PZF20000")) {
         /* Dual SIM Dual Netcom UHL Europe Africa Asia (OCE_DUGL) */
-        property_set("ro.build.product", "htc_ocedugl");
-        property_set("ro.product.model", "HTC_U-1u");
-		property_set("ro.ril.enable.pre_r8fd", "1");
-		property_set("ro.ril.hsxpa", "5");
-		property_set("ro.ril.hsdpa.category", "24");
-		property_set("ro.ril.hsupa.category", "6");
-		property_set("ro.ril.disable.cpc", "0");
-		property_set("persist.rild.nitz_plmn", "");
-		property_set("persist.rild.nitz_long_ons_0", "");
-		property_set("persist.rild.nitz_long_ons_1", "");
-		property_set("persist.rild.nitz_long_ons_2", "");
-		property_set("persist.rild.nitz_long_ons_3", "");
-		property_set("persist.rild.nitz_short_ons_0", "");
-		property_set("persist.rild.nitz_short_ons_1", "");
-		property_set("persist.rild.nitz_short_ons_2", "");
-		property_set("persist.rild.nitz_short_ons_3", "");
-		property_set("ril.subscription.types", "NV,RUIM");
-		property_set("telephony.lteOnCdmaDevice", "1");
+        property_override("ro.build.product", "htc_ocedugl");
+        property_override("ro.product.model", "HTC_U-1u");
+        property_set("ro.ril.enable.pre_r8fd", "1");
+        property_set("ro.ril.hsxpa", "5");
+        property_set("ro.ril.hsdpa.category", "24");
+        property_set("ro.ril.hsupa.category", "6");
+        property_set("ro.ril.disable.cpc", "0");
+        property_set("persist.rild.nitz_plmn", "");
+        property_set("persist.rild.nitz_long_ons_0", "");
+        property_set("persist.rild.nitz_long_ons_1", "");
+        property_set("persist.rild.nitz_long_ons_2", "");
+        property_set("persist.rild.nitz_long_ons_3", "");
+        property_set("persist.rild.nitz_short_ons_0", "");
+        property_set("persist.rild.nitz_short_ons_1", "");
+        property_set("persist.rild.nitz_short_ons_2", "");
+        property_set("persist.rild.nitz_short_ons_3", "");
+        property_set("ril.subscription.types", "NV,RUIM");
+        property_set("telephony.lteOnCdmaDevice", "1");
+        property_set("persist.radio.multisim.config", "dsds");
     } else if (strstr(bootmid, "2PZF30000")) {
         /* Dual card full Netcom UHL China (OCE_DUGL) */
-        property_set("ro.build.product", "htc_ocedugl");
-        property_set("ro.product.model", "HTC_U-1w");
+        property_override("ro.build.product", "htc_ocedugl");
+        property_override("ro.product.model", "HTC_U-1w");
 		property_set("ro.ril.enable.pre_r8fd", "1");
 		property_set("ro.ril.hsxpa", "5");
 		property_set("ro.ril.hsdpa.category", "24");
@@ -115,10 +127,11 @@ void vendor_load_properties()
 		property_set("persist.rild.nitz_short_ons_3", "");
 		property_set("ril.subscription.types", "NV,RUIM");
 		property_set("telephony.lteOnCdmaDevice", "1");
+        property_set("persist.radio.multisim.config", "dsds");
     } else {
         /* GSM (OCE_UL) */
-        property_set("ro.build.product", "htc_oceul");
-        property_set("ro.product.model", "HTC U Ultra");
+        property_override("ro.build.product", "htc_oceul");
+        property_override("ro.product.model", "HTC U Ultra");
     }
 
     //set_props_from_build();

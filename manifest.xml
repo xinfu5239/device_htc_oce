@@ -35,14 +35,14 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.broadcastradio</name>
+	<hal format="hidl">
+        <name>android.hardware.cas</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
-            <name>IBroadcastRadioFactory</name>
+            <name>IMediaCasService</name>
             <instance>default</instance>
-        </interface>
+       </interface>
     </hal>
     <hal format="hidl">
         <name>android.hardware.camera.provider</name>
@@ -234,7 +234,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.sensors</name>
-        <transport>hwbinder</transport>
+        <transport arch="32+64">passthrough</transport>
         <version>1.0</version>
         <interface>
             <name>ISensors</name>

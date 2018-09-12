@@ -123,3 +123,11 @@ LOCAL_SRC_FILES    := etc/loggy.sh
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 LOCAL_VENDOR_MODULE    := false
 include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := init.usbdiag.sh
+LOCAL_MODULE_TAGS  := optional eng
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_SRC_FILES    := bin/init.usbdiag.sh
+LOCAL_VENDOR_MODULE    := true
+include $(BUILD_PREBUILT)
