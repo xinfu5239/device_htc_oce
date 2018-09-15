@@ -67,6 +67,9 @@ TARGET_KERNEL_CONFIG := oce_defconfig
 
 BOARD_ROOT_EXTRA_FOLDERS := bt_firmware crashdump.d firmware persist
 
+# ANT+
+BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
+
 # Audio
 #AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD := true
 AUDIO_FEATURE_ENABLED_ACDB_LICENSE := true
