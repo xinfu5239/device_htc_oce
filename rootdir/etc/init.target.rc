@@ -274,11 +274,19 @@ on boot
     chmod 0220 /sys/class/htc_g_sensor/g_sensor/g_sensor_user_offset
 
     # PL-sensor(CPU) \ Common Interface(MCU)
+    chown radio system /sys/class/optical_sensors/proximity/PhoneApp_status
+    chown system system /sys/class/optical_sensors/proximity/flush
+    chown system system /sys/class/optical_sensors/lightsensor/ls_flush
     chown system system /sys/class/optical_sensors/proximity/p_status
     chown system system /sys/class/optical_sensors/proximity/ps_info
+    chown system system /sys/class/optical_sensors/proximity/ps_pocket
     chown radio radio /sys/class/optical_sensors/proximity/ps_adc
+    chmod 0660 /sys/class/optical_sensors/proximity/PhoneApp_status
+    chmod 0660 /sys/class/optical_sensors/proximity/flush
+    chmod 0660 /sys/class/optical_sensors/lightsensor/ls_flush
     chmod 444 /sys/class/optical_sensors/proximity/p_status
     chmod 444 /sys/class/optical_sensors/proximity/ps_info
+    chmod 220 /sys/class/optical_sensors/proximity/ps_pocket
     chmod 444 /sys/class/optical_sensors/proximity/ps_adc
 
     # LED
@@ -287,6 +295,19 @@ on boot
     chown system system /sys/class/leds/indicator/device
     chown system system /sys/class/leds/indicator/max_brightness
     chown system system /sys/class/leds/indicator/power
+
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/green/off_timer
+    chown system system /sys/class/leds/amber/brightness
+    chown system system /sys/class/leds/amber/blink
+    chown system system /sys/class/leds/amber/off_timer
+    chown system system /sys/class/leds/indicator/off_timer
+
+    # AOD/Subscreen
+    chown system graphics /sys/class/graphics/fb0/aod_ctrl
+    chown system system   /sys/class/leds/sub-backlight/brightness
+    chown system graphics /sys/class/leds/sub-backlight/bl_sync
 
     # Flashlight
     chown system system /sys/class/leds/flashlight/brightness

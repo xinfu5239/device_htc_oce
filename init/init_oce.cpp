@@ -107,6 +107,7 @@ void vendor_load_properties()
         property_set("ril.subscription.types", "NV,RUIM");
         property_set("telephony.lteOnCdmaDevice", "1");
         property_set("persist.radio.multisim.config", "dsds");
+        property_set("ril.htc.multisim.cfg", "dsds");
     } else if (strstr(bootmid, "2PZF30000")) {
         /* Dual card full Netcom UHL China (OCE_DUGL) */
         property_override("ro.build.product", "htc_ocedugl");
@@ -128,6 +129,7 @@ void vendor_load_properties()
 		property_set("ril.subscription.types", "NV,RUIM");
 		property_set("telephony.lteOnCdmaDevice", "1");
         property_set("persist.radio.multisim.config", "dsds");
+        property_set("ril.htc.multisim.cfg", "dsds");
     } else {
         /* GSM (OCE_UL) */
         property_override("ro.build.product", "htc_oceul");
