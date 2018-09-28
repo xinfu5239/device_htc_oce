@@ -197,10 +197,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.sta_detect=false \
     ro.qti.sensors.mot_detect=false
 
-# Storage
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.sdcardfs=false
-
 # System prop for enabling/disabling Android XLAT
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.net.doxlat=false
