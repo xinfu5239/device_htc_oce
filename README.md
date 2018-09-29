@@ -1,4 +1,4 @@
-[WIP] Device Tree for HTC U Ultra Dual Sim(oce)
+Device Tree for HTC U Ultra Single/Dual Sim(oce)
 ===========================================
 
 The HTC U Ultra (codenamed _"oce"_) is a flagship smartphone from HTC.
