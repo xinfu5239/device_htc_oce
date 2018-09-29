@@ -153,12 +153,9 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service \
     com.qualcomm.qti.camera \
-#    libmm-qcamera \
+    libmm-qcamera \
     Snap \
     libion
-#    libqomx_core \
-#    libmmjpeg_interface \
-#    libmmcamera_interface
 
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
