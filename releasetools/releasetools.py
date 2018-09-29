@@ -14,6 +14,12 @@
 #
 
 def FullOTA_InstallEnd(info):
-  info.script.Mount("/system")
-  info.script.AppendExtra('run_program("/tmp/install/bin/variants.sh");')
-  info.script.Unmount("/system")
+  info.script.AppendExtra('if (getprop("ro.boot.mid") == "2PZF30000" || getprop("ro.boot.mid") == "2PZF10000") then')
+  info.script.Print("This is a uhl device - renaming radio props")
+  info.script.AppendExtra('mount("ext4", "EMMC", "/dev/block/bootdevice/by-name/system", "/system", "");')
+  info.script.AppendExtra('rename("/system/vendor/lib64/libril-qc-ltedirectdisc.so.uhl", "/system/vendor/lib64/libril-qc-ltedirectdisc.so");')
+  info.script.AppendExtra('rename("/system/vendor/lib64/libril-qc-qmi-1.so.uhl", "/system/vendor/lib64/libril-qc-qmi-1.so");')
+  info.script.AppendExtra('rename("/system/vendor/lib64/libril-qc-radioconfig.so.uhl", "/system/vendor/lib64/libril-qc-radioconfig.so");')
+  info.script.AppendExtra('rename("/system/vendor/lib64/libril-qcril-hook-oem.so.uhl", "/system/vendor/lib64/libril-qcril-hook-oem.so");')
+  info.script.AppendExtra('unmount("/system");')
+  info.script.AppendExtra('endif;')
