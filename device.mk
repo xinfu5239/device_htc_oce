@@ -261,6 +261,7 @@ PRODUCT_PACKAGES += \
     init.htc.fp.sh \
     init.htc.post_boot.sh \
     init.htc.slpi.sh \
+    init.htc_oce.fp.rc \
     init.qcom.early_boot.sh \
     init.qcom.post_boot.sh \
     init.qcom.firmware_links.sh \
