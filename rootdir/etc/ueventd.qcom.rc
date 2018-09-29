@@ -327,3 +327,7 @@
 
 # Kmsg device
 /dev/kmsg                                               0620   root       system
+
+# NanoHub devices (Sensors)
+/dev/nanohub              0660   system     system
+/dev/nanohub_comms        0660   system     system
