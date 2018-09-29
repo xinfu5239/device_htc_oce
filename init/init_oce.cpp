@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2013, The Linux Foundation. All rights reserved.
+   Copyright (c) 2016, The Linux Foundation. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -28,116 +28,88 @@
  */
 
 #include <stdlib.h>
-#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
-#include <sys/_system_properties.h>
+#include <stdio.h>
 
-#include <android-base/properties.h>
 #include <android-base/logging.h>
+#include <android-base/properties.h>
 
-#include "property_service.h"
 #include "vendor_init.h"
+#include "property_service.h"
+
+/* Device specific properties */
+#include "htc-dtwl.h"
+#include "htc-dugl.h"
+#include "htc-dugl_tw.h"
+#include "htc-uhl.h"
 
 using android::base::GetProperty;
 using android::init::property_set;
 
-void property_override(char const prop[], char const value[])
+static void load_properties(const char *original_data)
 {
-    prop_info *pi;
-    
-    pi = (prop_info*) __system_property_find(prop);
-    if (pi)
-    __system_property_update(pi, value, strlen(value));
-    else
-    __system_property_add(prop, strlen(prop), value, strlen(value));
+    char *data;
+    char *key, *value, *eol, *sol, *tmp;
+
+    if ((data = (char *) malloc(strlen(original_data)+1)) == NULL) {
+        LOG(ERROR) << "Out of memory!" <<std::endl;
+        return;
+    }
+
+    strcpy(data, original_data);
+
+    sol = data;
+    while ((eol = strchr(sol, '\n'))) {
+        key = sol;
+        *eol++ = 0;
+        sol = eol;
+
+        while (isspace(*key)) key++;
+        if (*key == '#') continue;
+
+        tmp = eol - 2;
+        while ((tmp > key) && isspace(*tmp)) *tmp-- = 0;
+
+        value = strchr(key, '=');
+        if (!value) continue;
+        *value++ = 0;
+
+        tmp = value - 2;
+        while ((tmp > key) && isspace(*tmp)) *tmp-- = 0;
+
+        while (isspace(*value)) value++;
+
+        property_set(key, value);
+    }
+
+    free(data);
 }
 
 void vendor_load_properties()
 {
     std::string platform;
-    char bootmid[PROP_VALUE_MAX];
-    char bootcid[PROP_VALUE_MAX];
-    char device[PROP_VALUE_MAX];
-    int rc;
+    std::string bootmid;
+    std::string bootcid;
 
-    platform = GetProperty("ro.board.platform", "");
+    platform = GetProperty("ro.board.platform","");
     if (platform != ANDROID_TARGET)
         return;
 
-    GetProperty("ro.boot.mid", bootmid);
-    GetProperty("ro.boot.cid", bootcid);
+    bootmid = GetProperty("ro.boot.mid","");
+    bootcid = GetProperty("ro.boot.cid","");
 
-    if (strstr(bootmid, "2PZF10000")) {
-        /* Europe (OCE_UHL) */
-        property_override("ro.build.product", "htc_oceuhl");
-        property_override("ro.product.model", "HTC U Ultra");
-        property_set("ro.ril.enable.pre_r8fd", "1");
-        property_set("ro.ril.hsxpa", "4");
-        property_set("ro.ril.hsdpa.category", "24");
-        property_set("ro.ril.hsupa.category", "6");
-        property_set("ro.ril.disable.cpc", "0");
-        property_set("persist.rild.nitz_plmn", "");
-        property_set("persist.rild.nitz_long_ons_0", "");
-        property_set("persist.rild.nitz_long_ons_1", "");
-        property_set("persist.rild.nitz_long_ons_2", "");
-        property_set("persist.rild.nitz_long_ons_3", "");
-        property_set("persist.rild.nitz_short_ons_0", "");
-        property_set("persist.rild.nitz_short_ons_1", "");
-        property_set("persist.rild.nitz_short_ons_2", "");
-        property_set("persist.rild.nitz_short_ons_3", "");
-        property_set("ril.subscription.types", "NV,RUIM");
-        property_set("telephony.lteOnCdmaDevice", "1");
-    } else if (strstr(bootmid, "2PZF20000")) {
-        /* Dual SIM Dual Netcom UHL Europe Africa Asia (OCE_DUGL) */
-        property_override("ro.build.product", "htc_ocedugl");
-        property_override("ro.product.model", "HTC_U-1u");
-        property_set("ro.ril.enable.pre_r8fd", "1");
-        property_set("ro.ril.hsxpa", "5");
-        property_set("ro.ril.hsdpa.category", "24");
-        property_set("ro.ril.hsupa.category", "6");
-        property_set("ro.ril.disable.cpc", "0");
-        property_set("persist.rild.nitz_plmn", "");
-        property_set("persist.rild.nitz_long_ons_0", "");
-        property_set("persist.rild.nitz_long_ons_1", "");
-        property_set("persist.rild.nitz_long_ons_2", "");
-        property_set("persist.rild.nitz_long_ons_3", "");
-        property_set("persist.rild.nitz_short_ons_0", "");
-        property_set("persist.rild.nitz_short_ons_1", "");
-        property_set("persist.rild.nitz_short_ons_2", "");
-        property_set("persist.rild.nitz_short_ons_3", "");
-        property_set("ril.subscription.types", "NV,RUIM");
-        property_set("telephony.lteOnCdmaDevice", "1");
-        property_set("persist.radio.multisim.config", "dsds");
-        property_set("ril.htc.multisim.cfg", "dsds");
-    } else if (strstr(bootmid, "2PZF30000")) {
-        /* Dual card full Netcom UHL China (OCE_DUGL) */
-        property_override("ro.build.product", "htc_ocedugl");
-        property_override("ro.product.model", "HTC_U-1w");
-		property_set("ro.ril.enable.pre_r8fd", "1");
-		property_set("ro.ril.hsxpa", "5");
-		property_set("ro.ril.hsdpa.category", "24");
-		property_set("ro.ril.hsupa.category", "6");
-		property_set("ro.ril.disable.cpc", "0");
-		property_set("persist.rild.nitz_plmn", "");
-		property_set("persist.rild.nitz_long_ons_0", "");
-		property_set("persist.rild.nitz_long_ons_1", "");
-		property_set("persist.rild.nitz_long_ons_2", "");
-		property_set("persist.rild.nitz_long_ons_3", "");
-		property_set("persist.rild.nitz_short_ons_0", "");
-		property_set("persist.rild.nitz_short_ons_1", "");
-		property_set("persist.rild.nitz_short_ons_2", "");
-		property_set("persist.rild.nitz_short_ons_3", "");
-		property_set("ril.subscription.types", "NV,RUIM");
-		property_set("telephony.lteOnCdmaDevice", "1");
-        property_set("persist.radio.multisim.config", "dsds");
-        property_set("ril.htc.multisim.cfg", "dsds");
+    LOG(INFO) << "Found bootcid " << bootcid << " bootmid " << bootmid << std::endl;
+
+    if (bootmid == "2PZF20000") {
+		if (is_variant_dugltw(bootcid)) {
+			load_properties(htc_dugltw_properties);
+        }else{
+			load_properties(htc_dugl_properties);
+		}
+    } else if (bootmid == "2PZF30000") {
+        load_properties(htc_dtwl_properties);
     } else {
-        /* GSM (OCE_UL) */
-        property_override("ro.build.product", "htc_oceul");
-        property_override("ro.product.model", "HTC U Ultra");
+        load_properties(htc_uhl_properties);
     }
-
-    //set_props_from_build();
-
-    GetProperty("ro.product.device", device);
-    LOG(ERROR) << "Found bootmid %s setting build properties for %s device\n" << bootmid << device;
 }
+
+        

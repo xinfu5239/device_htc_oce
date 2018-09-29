@@ -27,10 +27,12 @@
 
 import /vendor/etc/init/hw/init.qcom.power.rc
 import /vendor/etc/init/hw/init.qcom.usb.rc
+import /vendor/etc/init/hw/init.msm.usb.configfs.rc
 import /vendor/etc/init/hw/init.target.rc
 import /vendor/etc/init/hw/init.htc_oce.fp.rc
 import /vendor/etc/init/hw/init.htc_multisim.rc
 import /vendor/etc/init/hw/init.common.nanohub.rc
+import /vendor/etc/init/hw/init.htc.usb.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -63,10 +65,12 @@ on early-boot
     # Allow subsystem (modem etc) debugging
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_cdsp/boot 1
-    write /sys/kernel/boot_slpi/boot 1
     chown root audio /sys/kernel/boot_adsp/boot
+    exec /vendor/bin/sh /vendor/bin/init.htc.slpi.sh
+    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
 
 on boot
+    enable qcom-usb-sh
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
@@ -550,6 +554,12 @@ service loc_launcher /vendor/bin/loc_launcher
     group gps inet diag wifi
     writepid /dev/cpuset/system-background/tasks
 
+service vendor-sensor-sh /vendor/bin/init.qcom.sensors.sh
+    class core
+    user root
+    oneshot
+    disabled
+
 #Start up peripheral manager
 service per_mgr /vendor/bin/pm-service
     class late_start
@@ -579,16 +589,6 @@ service energy-awareness /vendor/bin/energy-awareness
     user root
     group system
     oneshot
-
-service perfd /vendor/bin/perfd
-    class main
-    user root
-    group root system
-    writepid /dev/cpuset/system-background/tasks
-    disabled
-
-on property:sys.post_boot.parsed=1
-    start perfd
 
 service ppd /vendor/bin/mm-pp-dpps
     class hal
@@ -633,11 +633,13 @@ service rmt_storage /vendor/bin/rmt_storage
     ioprio rt 0
     writepid /dev/cpuset/system-background/tasks
 
-service sensors /vendor/bin/sensors.qcom
+service vendor.sensors /vendor/bin/sensors.qcom
     class core
     user root
     group root
+    #capabilities NET_BIND_SERVICE
     writepid /dev/cpuset/system-background/tasks
+    disabled
 
 service ssr_diag /system/vendor/bin/ssr_diag
     class late_start
@@ -648,6 +650,12 @@ service ssr_diag /system/vendor/bin/ssr_diag
 service ssr_setup /system/vendor/bin/ssr_setup
     oneshot
     disabled
+
+service qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
+    class late_start
+    user root
+    disabled
+    oneshot
 
 service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
    class main
@@ -666,6 +674,13 @@ service tftp_server /vendor/bin/tftp_server
     class core
     user root
     writepid /dev/cpuset/system-background/tasks
+
+# init.qcom.usb.sh configure RNDIS to go through HW IPA
+service qcom-usb-sh /vendor/bin/init.qcom.usb.sh
+    class core
+    user root
+    oneshot
+    disabled
 
 service time_daemon /vendor/bin/time_daemon
     class main
@@ -690,7 +705,7 @@ on class_start:late_start
     write /data/misc/radio/copy_complete 1
 
 on property:sys.boot_completed=1
-
+    start qcom-post-boot
     # Enable ZRAM on boot_complete
     # swapon_all /vendor/etc/fstab.qcom
 

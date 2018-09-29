@@ -17,7 +17,6 @@
 /dev/block/platform/soc/624000.ufshc/by-name/misc          /misc              emmc    defaults                                                                                          defaults
 /dev/block/platform/soc/624000.ufshc/by-name/adsp          /firmware/adsp     vfat    ro,uid=1000,gid=1000,fmask=0337,dmask=0227,shortname=lower					  wait
 /dev/block/platform/soc/624000.ufshc/by-name/radio         /firmware/radio    vfat    ro,uid=1000,gid=1000,fmask=0337,dmask=0227,shortname=lower					  wait
-/dev/block/platform/soc/624000.ufshc/by-name/slpi          /firmware/slpi     vfat    ro,uid=1000,gid=1000,fmask=0337,dmask=0227,shortname=lower					  wait
 /dev/block/platform/soc/624000.ufshc/by-name/venus         /firmware/venus    vfat    ro,uid=1000,gid=1000,fmask=0337,dmask=0227,shortname=lower					  wait
 
 

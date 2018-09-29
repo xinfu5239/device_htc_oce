@@ -13,7 +13,7 @@ persist.vendor.bt.enable.splita2dp=false
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=7
 ro.vendor.audio.sdk.ssr=false
-ro.vendor.audio.sdk.fluencetype=none
+ro.vendor.audio.sdk.fluencetype=fluence
 vendor.audio.dmid=-1286820014
 vendor.audio.dolby.ds2.enabled=1
 vendor.audio.dolby.ds2.hardbypass=1
@@ -157,9 +157,6 @@ ro.qti.sensors.pmd=false
 ro.qti.sensors.sta_detect=false
 ro.qti.sensors.mot_detect=false
 
-# SSC/SLPI sensor daemon
-# ro.qualcomm.ssc=true
-
 # Storage
 ro.sys.sdcardfs=false
 
@@ -191,3 +188,4 @@ persist.volte_enabled_by_hw=1
 ro.opa.eligible_device=true
 keyguard.no_require_sim=true
 
+persist.fuse_sdcard=true

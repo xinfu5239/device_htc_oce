@@ -42,7 +42,6 @@ on early-init
     chown system system /firmware/image
     mkdir /firmware/adsp 0771 system system
     mkdir /firmware/radio 0771 system system
-    mkdir /firmware/slpi 0771 system system
     mkdir /firmware/venus 0771 system system
     mkdir /firmware/wsd 0500 oem_2903 oem_2903
 
@@ -50,7 +49,6 @@ on early-init
     symlink /system/vendor /vendor
 
 on init
-    # QSEE rpmb listener need symlink for bootdevice
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
@@ -64,6 +62,7 @@ on early-boot
     write /sys/bus/msm_subsys/devices/subsys5/restart_level "related"
 
 on boot
+    enable qcom-usb-sh
     # To prevent permission denied error for telephony
     chmod 0644 /proc/cmdline
 
@@ -92,8 +91,25 @@ on boot
     chown system graphics /sys/class/leds/lcd-backlight/cabc_level_ctl
     chown system graphics /sys/class/leds/lcd-backlight/color_temp_ctl
     chown system graphics /sys/class/leds/lcd-backlight/color_profile_ctl
+    chown system graphics /sys/class/leds/lcd-backlight/disp_cali_enable
+    chown system graphics /sys/class/leds/lcd-backlight/bklt_cali_enable
+    chown system graphics /sys/class/htc_display/ddic_color_mode_ctrl
+    chown system graphics /sys/class/htc_display/get_color_modes
+    chown system graphics /sys/class/htc_display/parse_bl_gain
     chown system system /sys/class/leds/lcd-backlight/burst_switch
+    chown system system /sys/class/leds/lcd-backlight/sre_enable
+
+    # nits will be deprecated
     chown system system /sys/class/leds/lcd-backlight-nits/brightness
+
+    # projector
+    chmod 0660 /dev/minifb
+    chown system graphics /dev/minifb
+
+# + SSD_RIL: set radio_feedback permissions
+    chown radio radio /dev/radio_feedback
+    chmod 0660 /dev/radio_feedback
+# - SSD_RIL
 
     # HDMI
     chmod 644 /sys/class/graphics/fb1/hpd
@@ -379,28 +395,33 @@ on post-fs-data
     chmod 0664 /persist/sensors/sns.reg
 
 on fs
+    wait /dev/block/bootdevice
+    wait /dev/device-mapper
     mount_all /vendor/etc/fstab.qcom
+
+    # Update dm-verity state and set partition.*.verified properties
+    verity_update_state
+
+    wait /dev/block/bootdevice/by-name/dsp
+    # HTC_AUD_START - ro for DSP mount to fix CTS failed
+    mount ext4 /dev/block/bootdevice/by-name/dsp /dsp ro nosuid nodev barrier=1,errors=panic
+    # HTC_AUD_END
+    restorecon_recursive /dsp
 
     # Add rfg_3 mounting from stock. This way we will still boot if partition doesn't actually exist on the device.
     wait /dev/block/bootdevice/by-name/rfg_3
     mount vfat /dev/block/bootdevice/by-name/rfg_3 /firmware/wsd ro shortname=lower,uid=3012,gid=3012,dmask=277,fmask=377
-
-    # Mount cradio image
-    #mkdir /firmware/cradio 0771 system system
-    #wait /dev/block/bootdevice/by-name/cradio
-    #mount vfat /dev/block/bootdevice/by-name/cradio /firmware/cradio ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
 
     # symlink firmware to /firmware/image
     wait /system/bin/sh
     class_start firmware-link
     wait /firmware/image/.adsp_done
     wait /firmware/image/.radio_done
-    wait /firmware/image/.sec_done
     wait /firmware/image/.venus_done
     setprop ro.boot.firmware.cpe 1
 
     # HTC feature: Support multiple firmware image mount points
-    write /sys/module/firmware_class/parameters/fw_path /firmware/image,/firmware/adsp,/firmware/radio,/firmware/slpi,/firmware/venus,/firmware/wsd,/vendor/firmware
+    write /sys/module/firmware_class/parameters/fw_path /firmware/image,/firmware/adsp,/firmware/radio,/firmware/venus,/firmware/wsd,/vendor/firmware
 
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
@@ -424,13 +445,18 @@ service fwnk-radio /system/bin/sh /init.qcom.firmware_links.sh /firmware/radio /
     class firmware-link
     oneshot
 
-service fwnk-sec  /system/bin/sh /init.qcom.firmware_links.sh /system/etc/firmware /firmware/image "keymaste* gpta*" sec
-    class firmware-link
-    oneshot
-
 service fwnk-venus /system/bin/sh /init.qcom.firmware_links.sh /firmware/venus /firmware/image "venus*" venus
     class firmware-link
     oneshot
+
+service htc-post-boot /system/bin/sh /vendor/bin/init.htc.post_boot.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+
+on property:init.svc.qcom-post-boot=stopped
+    start htc-post-boot
 
 service loggy /system/bin/sh /loggy.sh
     class main
@@ -440,3 +466,4 @@ service loggy /system/bin/sh /loggy.sh
 
 service usbdiag_init /vendor/bin/init.usbdiag.sh
     class main
+    oneshot

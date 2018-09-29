@@ -23,7 +23,8 @@ $(call inherit-product-if-exists, vendor/htc/oce/oce-vendor.mk)
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay-lineage \
+    $(LOCAL_PATH)/overlay-rr
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
@@ -253,9 +254,17 @@ PRODUCT_PACKAGES += \
     init.htc_multisim.rc \
     init.htc_oce_fp.rc \
     init.common.nanohub.rc \
+    init.htc.usb.configfs.rc \
+    init.htc.usb.rc \
+    init.msm.usb.configfs.rc \
     init.qcom.usb.sh \
+    init.qcom.sensors.sh \
     init.qcom.sh \
     init.htc.fp.sh \
+    init.htc.post_boot.sh \
+    init.htc.slpi.sh \
+    init.qcom.early_boot.sh \
+    init.qcom.post_boot.sh \
     init.qcom.firmware_links.sh \
     loggy.sh \
     init.usbdiag.sh \
@@ -354,7 +363,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service-qti
+    android.hardware.power@1.1-service-qti
 
 # Prebuilts
 PRODUCT_COPY_FILES += \
@@ -399,8 +408,12 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
+    libsensorndkbridge \
+    libhubconnection \
+    android.hardware.contexthub@1.0-service \
+    android.hardware.contexthub@1.0-impl \
     android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service
+    android.hardware.sensors@1.0-service \
 
 # Tethering
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -421,7 +434,7 @@ PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
 
 # Thermal HAL
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     android.hardware.thermal@1.0-impl \
     android.hardware.thermal@1.0-service \
     thermal.msm8996

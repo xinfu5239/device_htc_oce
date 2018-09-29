@@ -35,14 +35,14 @@
             <instance>default</instance>
         </interface>
     </hal>
-	<hal format="hidl">
-        <name>android.hardware.cas</name>
+    <hal format="hidl">
+        <name>android.hardware.broadcastradio</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
-            <name>IMediaCasService</name>
+            <name>IBroadcastRadioFactory</name>
             <instance>default</instance>
-       </interface>
+        </interface>
     </hal>
     <hal format="hidl">
         <name>android.hardware.camera.provider</name>
@@ -51,6 +51,15 @@
         <interface>
             <name>ICameraProvider</name>
             <instance>legacy/0</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.cas</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IMediaCasService</name>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -190,27 +199,18 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>vendor.lineage.livedisplay</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IColor</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.radio</name>
         <transport>hwbinder</transport>
         <version>1.1</version>
         <interface>
             <name>IRadio</name>
             <instance>slot1</instance>
-			<instance>slot2</instance>
+            <instance>slot2</instance>
         </interface>
         <interface>
             <name>ISap</name>
             <instance>slot1</instance>
-			<instance>slot2</instance>
+            <instance>slot2</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -220,7 +220,7 @@
         <interface>
             <name>IOemHook</name>
             <instance>slot1</instance>
-			<instance>slot2</instance>
+            <instance>slot2</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -229,6 +229,15 @@
         <version>1.0</version>
         <interface>
             <name>IDevice</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.contexthub</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IContexthub</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -251,11 +260,11 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.thermal</name>
+        <name>android.hardware.vibrator</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
-            <name>IThermal</name>
+            <name>IVibrator</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -284,7 +293,7 @@
         <interface>
             <name>IHtcRadio</name>
             <instance>slot1</instance>
-			<instance>slot2</instance>
+            <instance>slot2</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -409,6 +418,15 @@
         </interface>
     </hal>
     <hal format="hidl">
+        <name>vendor.lineage.livedisplay</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IColor</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>vendor.nxp.nxpnfc</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -481,6 +499,24 @@
         </interface>
     </hal>
     <hal format="hidl">
+        <name>vendor.qti.hardware.perf</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IPerf</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.hardware.qdutils_disp</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IQdutilsDisp</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>vendor.qti.hardware.qteeconnector</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -500,7 +536,7 @@
         <interface>
             <name>IQcRilAudio</name>
             <instance>slot1</instance>
-			<instance>slot2</instance>
+            <instance>slot2</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -519,7 +555,7 @@
         <interface>
             <name>IConfig</name>
             <instance>radioconfig0</instance>
-			<instance>radioconfig1</instance>
+            <instance>radioconfig1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -529,7 +565,7 @@
         <interface>
             <name>IImsRadio</name>
             <instance>imsradio0</instance>
-			<instance>imsradio1</instance>
+            <instance>imsradio1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -539,7 +575,7 @@
         <interface>
             <name>IUimLpa</name>
             <instance>UimLpa0</instance>
-			<instance>UimLpa1</instance>
+            <instance>UimLpa1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -549,7 +585,7 @@
         <interface>
             <name>IQtiOemHook</name>
             <instance>oemhook0</instance>
-			<instance>oemhook1</instance>
+            <instance>oemhook1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -559,7 +595,7 @@
         <interface>
             <name>IQtiRadio</name>
             <instance>slot1</instance>
-			<instance>slot2</instance>
+            <instance>slot2</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -569,7 +605,7 @@
         <interface>
             <name>IUim</name>
             <instance>Uim0</instance>
-			<instance>Uim1</instance>
+            <instance>Uim1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -579,7 +615,7 @@
         <interface>
             <name>IUimRemoteServiceClient</name>
             <instance>uimRemoteClient0</instance>
-			<instance>uimRemoteClient1</instance>
+            <instance>uimRemoteClient1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -589,7 +625,7 @@
         <interface>
             <name>IUimRemoteServiceServer</name>
             <instance>uimRemoteServer0</instance>
-			<instance>uimRemoteServer1</instance>
+            <instance>uimRemoteServer1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -601,27 +637,7 @@
             <instance>imsrtpservice</instance>
         </interface>
     </hal>
-    <!-- qdutils service -->
-    <hal format="hidl">
-        <name>vendor.qti.hardware.qdutils_disp</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IQdutilsDisp</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <!-- vibrator service -->
-    <hal format="hidl">
-        <name>android.hardware.vibrator</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IVibrator</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <sepolicy>
-        <version>26.0</version>
+        <version>27.0</version>
     </sepolicy>
 </manifest>
