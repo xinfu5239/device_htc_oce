@@ -106,6 +106,7 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
+    libaudioroute \
     libvolumelistener \
     tinymix
 
@@ -363,7 +364,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.1-service-qti
+    android.hardware.power@1.0-service-qti
 
 # Prebuilts
 PRODUCT_COPY_FILES += \
@@ -409,11 +410,8 @@ PRODUCT_COPY_FILES += \
 # Sensors
 PRODUCT_PACKAGES += \
     libsensorndkbridge \
-    libhubconnection \
-    android.hardware.contexthub@1.0-service \
-    android.hardware.contexthub@1.0-impl \
     android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service \
+    android.hardware.sensors@1.0-service
 
 # Tethering
 PRODUCT_PROPERTY_OVERRIDES += \

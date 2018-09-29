@@ -27,7 +27,7 @@ $(call inherit-product, vendor/rr/config/common_full_phone.mk)
 PRODUCT_DEVICE := oce
 PRODUCT_NAME := rr_oce
 PRODUCT_BRAND := htc
-PRODUCT_MODEL := HTC U Ultra
+PRODUCT_MODEL := U Ultra
 PRODUCT_MANUFACTURER := HTC
 PRODUCT_RELEASE_NAME := oce
 
