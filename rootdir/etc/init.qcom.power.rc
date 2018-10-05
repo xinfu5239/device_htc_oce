@@ -4,6 +4,9 @@ on init
     write /sys/block/mmcblk1/bdi/read_ahead_kb 512
     write /sys/module/lpm_levels/parameters/sleep_disabled "Y"
 
+    # Create Power HAL tunables
+    mkdir /dev/voxpopuli 0555 system system
+
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3

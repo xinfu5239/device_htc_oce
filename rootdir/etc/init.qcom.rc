@@ -394,6 +394,9 @@ on post-fs-data
     mkdir /data/vendor/audio/acdbdata 0770 media audio
     mkdir /data/vendor/audio/acdbdata/delta 0770 media audio
 
+    chown radio radio /carrier
+    chown radio radio /carrier/htcril.db
+
     setprop vold.post_fs_data_done 1
 
     #Create a folder for SRS to be able to create a usercfg file
@@ -705,7 +708,7 @@ on class_start:late_start
     write /data/misc/radio/copy_complete 1
 
 on property:sys.boot_completed=1
-    start qcom-post-boot
+    # start qcom-post-boot
     # Enable ZRAM on boot_complete
     # swapon_all /vendor/etc/fstab.qcom
 
