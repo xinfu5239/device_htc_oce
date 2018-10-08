@@ -34,8 +34,6 @@ on charger
     start vendor.hvdcp_opti
 
 on early-init
-    symlink /data/tombstones /tombstones
-
     mkdir /dev/radio 0770 radio radio
     chown system system /firmware/image
 
