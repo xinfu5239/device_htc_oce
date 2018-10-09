@@ -64,7 +64,6 @@ BOARD_RAMDISK_OFFSET     := 0x01000000
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/htc/oce
 TARGET_KERNEL_CONFIG := oce_defconfig
-TARGET_KERNEL_CLANG_COMPILE := true
 
 BOARD_ROOT_EXTRA_FOLDERS := bt_firmware crashdump.d firmware persist
 
