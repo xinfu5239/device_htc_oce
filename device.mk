@@ -24,7 +24,7 @@ $(call inherit-product-if-exists, vendor/htc/oce/oce-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-lineage \
-    $(LOCAL_PATH)/overlay-rr
+#    $(LOCAL_PATH)/overlay-rr
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
