@@ -429,7 +429,7 @@ on fs
 
 on property:init.svc.bootanim=running
     write /sys/class/leds/wled/brightness 4095
-    start loggy
+    #start loggy
 
 # Services begin here
 # Firmware linking to /firmware/image
