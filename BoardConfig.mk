@@ -171,6 +171,7 @@ BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 # HIDL
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(VENDOR_PATH)/vendor_framework_compatibility_matrix.xml
 
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
