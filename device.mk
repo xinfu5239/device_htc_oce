@@ -169,8 +169,8 @@ PRODUCT_PACKAGES += \
     services-ext
 
 # Device Settings
-#PRODUCT_PACKAGES += \
-#    DeviceSettings
+PRODUCT_PACKAGES += \
+    DeviceSettings
 
 # Display
 PRODUCT_PACKAGES += \
