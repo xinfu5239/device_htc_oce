@@ -107,11 +107,11 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
-    audio_amplifier.msm8996 \
     audio.primary.msm8996 \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
+    libaudiopolicymanager \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
@@ -230,8 +230,8 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.1-impl-qti \
-    android.hardware.gnss@1.1-service-qti \
+    android.hardware.gnss@1.0-impl-qti \
+    android.hardware.gnss@1.0-service-qti \
     libcurl \
     libgnss \
     libloc_pla \
