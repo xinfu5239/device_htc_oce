@@ -104,6 +104,9 @@ PRODUCT_PACKAGES += \
     antradio_app \
     com.dsi.ant.antradio_library
 
+PRODUCT_COPY_FILES += \
+    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
