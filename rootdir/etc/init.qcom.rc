@@ -588,11 +588,15 @@ service netmgrd /vendor/bin/netmgrd
     class main
     writepid /dev/cpuset/system-background/tasks
 
-service energy-awareness /vendor/bin/energy-awareness
+service perfd /vendor/bin/perfd
     class main
     user root
-    group system
-    oneshot
+    group root system
+    writepid /dev/cpuset/system-background/tasks
+    disabled
+
+on property:sys.post_boot.parsed=1
+    start perfd
 
 service ppd /vendor/bin/mm-pp-dpps
     class hal
