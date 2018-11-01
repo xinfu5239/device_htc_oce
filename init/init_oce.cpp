@@ -39,6 +39,7 @@
 /* Device specific properties */
 #include "htc-dtwl.h"
 #include "htc-dugl.h"
+#include "htc-dugl_arabic.h"
 #include "htc-dugl_tw.h"
 #include "htc-uhl.h"
 
@@ -100,11 +101,13 @@ void vendor_load_properties()
     LOG(INFO) << "Found bootcid " << bootcid << " bootmid " << bootmid << std::endl;
 
     if (bootmid == "2PZF20000") {
-		if (is_variant_dugltw(bootcid)) {
-			load_properties(htc_dugltw_properties);
+        if (is_variant_dugltw(bootcid)) {
+            load_properties(htc_dugltw_properties);
+        }else if (is_variant_duglarabic(bootcid)) {
+            load_properties(htc_duglarabic_properties);
         }else{
-			load_properties(htc_dugl_properties);
-		}
+            load_properties(htc_dugl_properties);
+        }
     } else if (bootmid == "2PZF30000") {
         load_properties(htc_dtwl_properties);
     } else {
