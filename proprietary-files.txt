@@ -818,7 +818,7 @@ vendor/lib64/libhdcp1prov.so
 vendor/lib64/libhtc_common.so
 
 # NFC
-vendor/firmware/libpn551_fw.so
+vendor/firmware/libpn551_fw.so:vendor/lib/libpn551_fw.so
 
 # Network
 -priv-app/QtiTetherService/QtiTetherService.apk
