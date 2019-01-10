@@ -144,10 +144,10 @@ on boot
     chmod 2770 /dev/socket/qmux_gps
 
     mkdir /persist/drm 0770 system system
-    mkdir /persist/bluetooth 0770 bluetooth bluetooth
+    mkdir /mnt/vendor/persist/bluetooth 0770 bluetooth bluetooth
     mkdir /persist/misc 0770 system system
-    mkdir /persist/alarm 0770 system system
-    mkdir /persist/time 0770 system system
+    mkdir /mnt/vendor/persist/alarm 0770 system system
+    mkdir /mnt/vendor/persist/time 0770 system system
     mkdir /mnt/vendor/persist/secnvm 0770 system system
 
     #Create NETMGR daemon socket area
@@ -718,6 +718,12 @@ service time_daemon /vendor/bin/time_daemon
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
+
+service vendor.power_off_alarm /vendor/bin/power_off_alarm
+    class core
+    group system
+    disabled
+    oneshot
 
 # WPA supplicant
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
