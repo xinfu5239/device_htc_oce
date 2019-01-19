@@ -212,7 +212,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # TimeService
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.delta_time.enable=true
+    persist.vendor.delta_time.enable=true
 
 # WFD
 PRODUCT_PROPERTY_OVERRIDES += \
