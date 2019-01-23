@@ -53,4 +53,5 @@ static const char *htc_dugl_properties =
 	    "persist.vendor.radio.sap_silent_pin=1\n"
 	    "ril.htc.multisim.cfg=dsds\n"
 	    "persist.radio.multisim.config=dsds\n"
+        "persist.nfc.smartcard.config=SIM1,SIM2,eSE1\n"
 ;

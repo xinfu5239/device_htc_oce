@@ -47,4 +47,5 @@ static const char *htc_uhl_properties =
         "persist.vendor.radio.data_ltd_sys_ind=1\n"
         "ro.telephony.default_network=9\n"
         "persist.vendor.radio.sap_silent_pin=1\n"
+        "persist.nfc.smartcard.config=SIM1,eSE1\n"
 ;

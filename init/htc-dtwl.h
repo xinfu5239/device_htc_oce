@@ -41,4 +41,5 @@ static const char *htc_dtwl_properties =
         "persist.vendor.radio.sw_mbn_update=1\n"
         "persist.vendor.radio.snapshot_timer=0\n"
         "persist.vendor.radio.data_ltd_sys_ind=1\n"
+        "persist.nfc.smartcard.config=SIM1,SIM2,eSE1\n"
 ;
