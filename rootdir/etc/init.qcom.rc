@@ -735,8 +735,6 @@ on class_start:late_start
     write /data/misc/radio/copy_complete 1
 
 on property:sys.boot_completed=1
-    # start qcom-post-boot
-    # Enable ZRAM on boot_complete
-    # swapon_all /vendor/etc/fstab.qcom
+    start qcom-post-boot
 
     write /dev/kmsg "BOOT COMPLETED"
