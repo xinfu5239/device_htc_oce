@@ -1,0 +1,4 @@
+set_prop(netmgrd, debug_prop, vendor_xlat_prop)
+allow netmgrd netutils_wrapper:process noatsecure;
+allow netmgrd sysfs:file { r_file_perms };
+allow netmgrd vendor_xlat_prop:property_service set;
