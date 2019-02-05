@@ -1,0 +1,3 @@
+allow vendor_per_mgr self:capability net_raw;
+allow vendor_per_mgr vfat:dir { open read search };
+allow vendor_per_mgr vfat:file { open read };
