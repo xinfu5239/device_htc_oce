@@ -111,7 +111,7 @@ allow system_server vendor_vm_bms_prop:file read;
 allow system_server vendor_wifi_ftmd_prop:file read;
 allow system_server vendor_wifi_prop:file read;
 allow system_server vendor_wlc_prop:file read;
-allow system_server wcnss_prop:file read;
+#allow system_server wcnss_prop:file read;
 allow system_server wfd_service_prop:file read;
 
 allow system_server proc_touchpanel:dir { r_dir_perms };

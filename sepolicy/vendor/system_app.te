@@ -97,7 +97,7 @@ allow system_app vendor_wifi_prop:file read;
 allow system_app vendor_xlat_prop:file read;
 allow system_app proc_touchpanel:dir { search };
 allow system_app proc_touchpanel:file { rw_file_perms };
-allow system_app wcnss_prop:file read;
+#allow system_app wcnss_prop:file read;
 allow system_app wifi_prop:file read;
 allow system_app wigig_prop:file read;
 
