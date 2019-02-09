@@ -59,7 +59,7 @@ allow untrusted_app_27 vendor_wifi_ftmd_prop:file read;
 allow untrusted_app_27 vendor_wifi_prop:file read;
 allow untrusted_app_27 vendor_wlc_prop:file read;
 allow untrusted_app_27 vendor_xlat_prop:file read;
-allow untrusted_app_27 wcnss_prop:file read;
+#allow untrusted_app_27 wcnss_prop:file read;
 allow untrusted_app_27 vendor_cgroup_follow_prop:file read;
 allow untrusted_app_27 vendor_core_ctl_prop:file read;
 allow untrusted_app_27 vendor_coresight_prop:file read;

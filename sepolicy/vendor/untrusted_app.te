@@ -138,7 +138,7 @@ allow untrusted_app vendor_wifi_ftmd_prop:file read;
 allow untrusted_app vendor_wifi_prop:file read;
 allow untrusted_app vendor_wlc_prop:file read;
 allow untrusted_app vendor_xlat_prop:file read;
-allow untrusted_app wcnss_prop:file read;
+#allow untrusted_app wcnss_prop:file read;
 allow untrusted_app wfd_debug_prop:file read;
 allow untrusted_app wfd_service_prop:file read;
 allow untrusted_app wifi_prop:file read;

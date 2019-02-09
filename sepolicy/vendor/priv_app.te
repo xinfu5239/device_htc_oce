@@ -112,7 +112,7 @@ allow priv_app vendor_time_service_prop:file read;
 allow priv_app vendor_usb_prop:file read;
 allow priv_app vendor_vm_bms_prop:file read;
 allow priv_app vendor_xlat_prop:file read;
-allow priv_app wcnss_prop:file read;
+#allow priv_app wcnss_prop:file read;
 allow priv_app wfd_debug_prop:file read;
 allow priv_app wfd_service_prop:file read;
 allow priv_app wifi_prop:file read;
