@@ -14,8 +14,8 @@
 // limitations under the License.
 
 cc_binary {
-    name: "vendor.lineage.touch@1.0-service.pme",
-    init_rc: ["vendor.lineage.touch@1.0-service.pme.rc"],
+    name: "vendor.lineage.touch@1.0-service.oce",
+    init_rc: ["vendor.lineage.touch@1.0-service.oce.rc"],
     defaults: ["hidl_defaults"],
     relative_install_path: "hw",
     vendor: true,
