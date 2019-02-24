@@ -136,11 +136,11 @@ on property:sys.boot_completed=1
     # Enable all LPMs (this will enable C4, D4, D3, E4 and M3 LPMs)
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
 
-    # Set perfd properties
-    setprop sys.post_boot.parsed 1
+on property:sys.boot_completed=1
+    trigger enable-low-power
 
     # Set I/O squeduler
-    setprop sys.io.scheduler "cfq"
+    setprop sys.io.scheduler "bfq"
 
     # Disable PowerHAL hint processing
     setprop vendor.powerhal.init 0
