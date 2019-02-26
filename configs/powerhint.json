@@ -52,6 +52,8 @@
       "Name": "CPUBigClusterMaxFreq",
       "Path": "/sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq",
       "Values": [
+        "2342400",
+        "2246400",
         "2150400",
         "2073600",
         "1996800",
@@ -85,6 +87,8 @@
       "Name": "CPUBigClusterMinFreq",
       "Path": "/sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq",
       "Values": [
+        "2342400",
+        "2246400",
         "2150400",
         "2073600",
         "1996800",
