@@ -67,6 +67,8 @@
         <value>1996800</value>
         <value>2073600</value>
         <value>2150400</value>
+        <value>2246400</value>
+        <value>2342400</value>
     </array>
     <array name="cpu.core_power.cluster0">
         <value>50</value>
