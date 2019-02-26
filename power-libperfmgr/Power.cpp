@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.power@1.2-service.pme"
+#define LOG_TAG "android.hardware.power@1.2-service.oce"
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
