@@ -20,7 +20,7 @@ BOARD_VENDOR := htc
 DEVICE_PATH := device/htc/oce
 
 # Asserts
-TARGET_OTA_ASSERT_DEVICE := oce,ocedugl,htc_ocedugl,oceuhl,htc_oceuhl
+TARGET_OTA_ASSERT_DEVICE := oce,ocedugl,htc_ocedugl,oceuhl,htc_oceuhl,htc_oceul,oceul
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8996
