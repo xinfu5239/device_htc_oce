@@ -40,6 +40,7 @@
 #include "htc-dtwl.h"
 #include "htc-dugl.h"
 #include "htc-dugl_arabic.h"
+#include "htc-dugl_hk.h"
 #include "htc-dugl_tw.h"
 #include "htc-uhl.h"
 
@@ -110,8 +111,14 @@ void vendor_load_properties()
         }
     } else if (bootmid == "2PZF30000") {
         load_properties(htc_dtwl_properties);
-    } else {
+    } else if (bootmid == "2PZF10000") {
         load_properties(htc_uhl_properties);
+    } else {
+        if (is_variant_duglhk(bootcid)) {
+            load_properties(htc_duglhk_properties);
+        }else{
+            load_properties(htc_dugl_properties);
+        }
     }
 }
 
