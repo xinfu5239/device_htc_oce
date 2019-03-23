@@ -17,4 +17,7 @@
 <resources>
     <!-- Button backlight -->
     <bool name="config_button_brightness_support">true</bool>
+
+    <!-- Whether device has a physical display cutout -->
+    <bool name="config_physicalDisplayCutout">true</bool>
 </resources>
