@@ -518,6 +518,13 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
+# WiFi Display
+PRODUCT_PACKAGES += \
+    libnl
+
+PRODUCT_BOOT_JARS += \
+    WfdCommon
+
 # Wifi tether
 PRODUCT_PROPERTY_OVERRIDES += \
     tether_dun_required=0
