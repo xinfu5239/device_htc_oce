@@ -118,6 +118,8 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8996 \
     audio.r_submix.default \
     audio.usb.default \
+    libaacwrapper \
+    libnl \
     libaudio-resampler \
     libaudiopolicymanager \
     libqcompostprocbundle \
@@ -516,6 +518,10 @@ PRODUCT_PACKAGES += \
 # VNDK-SP:
 PRODUCT_PACKAGES += \
     vndk-sp
+
+# Wifi-Display
+PRODUCT_BOOT_JARS += \
+    WfdCommon
 
 # Wifi
 PRODUCT_PACKAGES += \
