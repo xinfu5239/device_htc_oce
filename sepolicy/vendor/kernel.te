@@ -1,13 +1,6 @@
-allow kernel init:process noatsecure;
-allow kernel self:capability { dac_override dac_read_search };
-allow kernel sysfs:file { open write }; 
-allow kernel vfat:dir search;
-allow kernel vfat:file open;
+allow kernel sysfs:file rw_file_perms; 
+allow kernel vfat:dir r_dir_perms;
+allow kernel vfat:file r_file_perms;
 
-allow kernel kcal_dev:dir relabelto;
-allow kernel kcal_dev:file relabelto;
-allow kernel kcal_dev:lnk_file relabelto;
-
-allow kernel sysfs_leds:dir search;
-allow kernel sysfs_graphics:dir search;
-allow kernel sysfs_graphics:file { open read write };
+# dont tell me..
+allow kernel self:capability dac_override;
