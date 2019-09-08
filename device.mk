@@ -23,7 +23,7 @@ $(call inherit-product-if-exists, vendor/htc/oce/oce-vendor.mk)
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage \
+#    $(LOCAL_PATH)/overlay-lineage \
 #    $(LOCAL_PATH)/overlay-rr
 
 PRODUCT_ENFORCE_RRO_TARGETS := framework-res
@@ -470,8 +470,8 @@ PRODUCT_PACKAGES += \
     telephony-ext \
     libshim_ims
 
-PRODUCT_BOOT_JARS += \
-    telephony-ext
+#PRODUCT_BOOT_JARS += \
+#    telephony-ext
 
 # TextClassifier smart selection model files
 PRODUCT_PACKAGES += \
@@ -523,8 +523,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libnl
 
-PRODUCT_BOOT_JARS += \
-    WfdCommon
+#PRODUCT_BOOT_JARS += \
+#    WfdCommon
 
 # Wifi tether
 PRODUCT_PROPERTY_OVERRIDES += \
