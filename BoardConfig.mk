@@ -68,7 +68,11 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/htc/oce
 TARGET_KERNEL_CONFIG := oce_defconfig
 
-BOARD_ROOT_EXTRA_FOLDERS := bt_firmware crashdump.d firmware persist
+BOARD_ROOT_EXTRA_FOLDERS := \
+    crashdump.d \
+    firmware/adsp \
+    firmware/radio \
+    firmware/venus
 
 # Audio
 #AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD := true
@@ -102,6 +106,7 @@ TARGET_USES_QCOM_MM_AUDIO := true
 
 BOARD_ROOT_EXTRA_SYMLINKS := \
     /vendor/dsp:/dsp \
+    /vendor/bt_firmware:/bt_firmware \
     /mnt/vendor/persist:/persist
 
 # Bluetooth
