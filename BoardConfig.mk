@@ -73,7 +73,8 @@ BOARD_ROOT_EXTRA_FOLDERS := \
     crashdump.d \
     firmware/adsp \
     firmware/radio \
-    firmware/venus
+    firmware/venus \
+    firmware/wsd
 
 # Audio
 #AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD := true
@@ -222,7 +223,6 @@ TARGET_USERIMAGES_USE_EXT4 := true
 
 # RIL
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
-TARGET_RIL_VARIANT := caf
 TARGET_USES_OLD_MNC_FORMAT := true
 
 # SELinux
