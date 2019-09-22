@@ -436,10 +436,6 @@ on fs
 
     # symlink firmware to /firmware/image
     wait /system/bin/sh
-    class_start firmware-link
-    wait /firmware/image/.adsp_done
-    wait /firmware/image/.radio_done
-    wait /firmware/image/.venus_done
     setprop ro.boot.firmware.cpe 1
 
     # HTC feature: Support multiple firmware image mount points
@@ -481,24 +477,6 @@ on property:sys.boot_completed=1
 on property:init.svc.bootanim=running
     write /sys/class/leds/wled/brightness 4095
     #start loggy
-
-# Services begin here
-# Firmware linking to /firmware/image
-service fwnk-adsp  /system/bin/sh /init.qcom.firmware_links.sh /firmware/adsp /firmware/image "adsp*" adsp
-    class firmware-link
-    oneshot
-
-service fwnk-cpe  /system/bin/sh /init.qcom.firmware_links.sh /firmware/adsp /firmware/image "cpe*" cpe
-    class firmware-link
-    oneshot
-
-service fwnk-radio /system/bin/sh /init.qcom.firmware_links.sh /firmware/radio /firmware/image "modem* mba* radiover* version* qdsp6m* msadp*" radio
-    class firmware-link
-    oneshot
-
-service fwnk-venus /system/bin/sh /init.qcom.firmware_links.sh /firmware/venus /firmware/image "venus*" venus
-    class firmware-link
-    oneshot
 
 service htc-post-boot /system/bin/sh /vendor/bin/init.htc.post_boot.sh
     class late_start
