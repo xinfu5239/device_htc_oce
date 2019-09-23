@@ -469,6 +469,7 @@ service charger /charger
     user system
     group system graphics input
     seclabel u:r:healthd:s0
+    capabilities SYS_BOOT
     writepid /dev/cpuset/system-background/tasks
 
 service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
