@@ -26,7 +26,7 @@ namespace touch {
 namespace V1_0 {
 namespace implementation {
 
-constexpr const char kControlPath[] = "/sys/devices/soc/757a000.i2c/i2c-6/6-0064/disable_key";
+constexpr const char kControlPath[] = "/sys/android_cap/enabled";
 
 KeyDisabler::KeyDisabler() {
     mHasKeyDisabler = !access(kControlPath, F_OK);
