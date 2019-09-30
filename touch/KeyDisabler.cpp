@@ -49,7 +49,7 @@ Return<bool> KeyDisabler::isEnabled() {
 Return<bool> KeyDisabler::setEnabled(bool enabled) {
     if (!mHasKeyDisabler) return false;
 
-    if (!android::base::WriteStringToFile((enabled ? "1" : "0"), kControlPath)) {
+    if (!android::base::WriteStringToFile((enabled ? "0" : "1"), kControlPath)) {
         LOG(ERROR) << "Failed to write " << kControlPath;
         return false;
     }
