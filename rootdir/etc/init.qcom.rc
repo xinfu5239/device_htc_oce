@@ -527,7 +527,6 @@ service vendor.imsrcsservice /vendor/bin/imsrcsd
     user radio
     group radio diag inet log
     writepid /dev/cpuset/system-background/tasks
-    disabled
 
 on property:vendor.ims.DATA_DAEMON_STATUS=1
     restart vendor.ims_rtp_daemon
