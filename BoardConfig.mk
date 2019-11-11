@@ -70,7 +70,6 @@ TARGET_KERNEL_CONFIG := oce_defconfig
 
 BOARD_ROOT_EXTRA_FOLDERS := \
     carrier \
-    crashdump.d \
     firmware/adsp \
     firmware/radio \
     firmware/venus \
