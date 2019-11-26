@@ -1,2 +1,0 @@
-type rootfs_data, file_type;
-type carrier_file, file_type;
