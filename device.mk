@@ -184,8 +184,8 @@ PRODUCT_PACKAGES += \
     NoCutoutOverlay
 
 # Device Settings
-PRODUCT_PACKAGES += \
-    DeviceSettings
+#PRODUCT_PACKAGES += \
+#    DeviceSettings
 
 # Display
 PRODUCT_PACKAGES += \
