@@ -88,13 +88,11 @@ etc/camera/imx351_htc_chromatix.xml
 etc/camera/ov12890eco_htc_chromatix.xml
 etc/camera/ov12890_htc_chromatix.xml
 etc/camera/s5k4e6_htc_chromatix.xml
-
 vendor/lib64/libawb_calibration.so
 vendor/lib/hw/camera.msm8996.so
 vendor/lib/libawb_calibration.so
 vendor/lib/libBeautyChat.so
 vendor/lib/libcamerapp.so
-
 vendor/lib/libcppf.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libjni_dualcamera.so
@@ -998,10 +996,9 @@ vendor/lib64/libimsmedia_jni.so
 vendor/lib64/librcc.so
 vendor/lib64/libvoice-svc.so
 
-#IMS - Taimen QPP6.190730.005
-vendor/bin/imsrcsd|afeb8ba71b688dec5ca8f0c47ded9bf8b675dbf8
-vendor/lib/lib-imsrcs.so|e5d66f60b8c4d3eae7fce3d57a004c774acd78ab
-vendor/lib64/lib-imsrcs.so|dc5ca0274b6e7eef47ac4979ef5774de22fe095e
+#IMS - Mata QP1A.190711.107
+-priv-app/ims/ims.apk|0f1e907bb3a0c2631f54310860711aa955710bfc
+vendor/bin/imsrcsd|3d36b51928bb0e3190bda0a58d718456cb9b5ca4
 
 # Sensors
 vendor/bin/sensors.qcom
