@@ -31,7 +31,22 @@ on boot
     write /dev/cpuset/camera-daemon/mems 0
     chown cameraserver cameraserver /dev/cpuset/camera-daemon
     chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
-    chmod 0660 /dev/cpuset/camera-daemon/tasks
+    chmod 0664 /dev/cpuset/camera-daemon/tasks
+
+on charger
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    write /sys/module/lpm_levels/parameters/sleep_disabled "N"
+
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/module/msm_thermal/core_control/cpus_offlined 14
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+    write /sys/module/msm_thermal/parameters/enabled "N"
+    mount_all charger.fstab.qcom
+    start vendor.hvdcp_opti
+    start thermal-engine
+    start vendor.power_off_alarm
 
 on enable-low-power
     # Disable thermal hotplug to switch governor
@@ -58,21 +73,21 @@ on enable-low-power
     chmod 755 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor schedutil
     chmod 755 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
-    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 10000
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 1275
     chmod 755 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable
-    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable 1
     chmod 755 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
-    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 850
 
     # Configure governor settings for big cluster
     chmod 755 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor schedutil
     chmod 755 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us
-    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us 5000
+    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us 1275
     chmod 755 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/iowait_boost_enable
-    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/iowait_boost_enable 0
+    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/iowait_boost_enable 1
     chmod 755 /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us
-    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us 850
 
     # CPU Scheduler
     chmod 755 /proc/sys/kernel/sched_boost
@@ -81,6 +96,7 @@ on enable-low-power
     # Re-enable thermal and BCL hotplug
     write /sys/module/msm_thermal/core_control/enabled 1
 
+<<<<<<< HEAD
     # Input boost configuration
     write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800 2:1324800"
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
@@ -93,6 +109,18 @@ on enable-low-power
     write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 3
     write /proc/sys/kernel/sched_init_task_load 100
+=======
+    # Disable touch boost
+    write /sys/module/msm_performance/parameters/touchboost 0
+
+    # Input boost configuration
+    write /sys/module/cpu_boost/parameters/input_boost_enabled 0
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:0 2:0"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 0
+
+    # Dynamic SchedTune Boost
+    write /sys/module/cpu_boost/parameters/dynamic_stune_boost 0
+>>>>>>> 29884aac6... oce: move back to Marlin perf stack
 
     # Enable bus-dcvs
     write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
@@ -116,12 +144,16 @@ on enable-low-power
     write /sys/class/devfreq/soc:qcom,memlat-cpu2/polling_interval 10
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
+<<<<<<< HEAD
     # Enable UFS powersaving
     write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 1
     write /sys/devices/soc/${ro.boot.bootdevice}/${ro.boot.bootdevice}:ufs_variant/pm_qos_enable 1
 
     # Enable all LPMs by default
     # This will enable C4, D4, D3, E4 and M3 LPMs
+=======
+    # Enable all LPMs (this will enable C4, D4, D3, E4 and M3 LPMs)
+>>>>>>> 29884aac6... oce: move back to Marlin perf stack
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
 
     # Enable Adaptive LMK
@@ -137,12 +169,38 @@ on property:init.svc.recovery=running
 on property:sys.boot_completed=1
     trigger enable-low-power
 
+<<<<<<< HEAD
     # Set BFQ scheduler
     setprop sys.io.scheduler "cfq"
 
     # Update cpusets now that boot is complete and we want better load balancing
+=======
+    # Set I/O squeduler
+    setprop sys.io.scheduler "bfq"
+
+    # Set GPU idle frequency to 133 MHz
+    write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 6
+
+    # Graphics Settings. Make sure we start at 624mhz(Default)
+    write /sys/class/kgsl/kgsl-3d/max_gpuclk 624000000
+    write /sys/class/devfreq/b00000.qcom,kgsl-3d0/max_freq 624000000
+    write /sys/class/devfreq/b00000.qcom,kgsl-3d0/min_freq 133000000
+
+    # Exec init.foreground.sh in background
+    start vendor.foreground_sh
+
+    # CDG congestion control
+    write /proc/sys/net/ipv4/tcp_congestion_control westwood
+
+    # update cpusets now that boot is complete and we want better load balancing
+>>>>>>> 29884aac6... oce: move back to Marlin perf stack
     write /dev/cpuset/top-app/cpus 0-3
     write /dev/cpuset/foreground/cpus 0-2
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-2
     write /dev/cpuset/restricted/cpus 0-1
+<<<<<<< HEAD
+=======
+
+    write /dev/kmsg "BOOT COMPLETED"
+>>>>>>> 29884aac6... oce: move back to Marlin perf stack

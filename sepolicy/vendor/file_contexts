@@ -55,6 +55,7 @@
 /system/vendor/bin/init\.qcom\.usb\.sh u:object_r:qcom-usb_exec:s0
 /(vendor|system/vendor)/bin/init.htc.fp.sh   u:object_r:qti_init_shell_exec:s0
 /(vendor|system/vendor)/bin/init.htc.slpi.sh   u:object_r:qti_init_shell_exec:s0
+/(vendor|system/vendor)/bin/perfd   u:object_r:perfd_exec:s0
 
 # LED
 /sys/class/leds(/.*)?   u:object_r:sysfs_leds:s0
