@@ -633,7 +633,6 @@ service vendor.htc.fp_sh /vendor/bin/init.htc.fp.sh
     class main
     user system
     group system
-    seclabel u:r:htc-fp:s0
     disabled
     oneshot
 
@@ -705,7 +704,6 @@ service charger /system/bin/charger
     class charger
     user system
     group system graphics input
-    seclabel u:r:charger:s0
 
 service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
     class core
