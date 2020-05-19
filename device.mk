@@ -261,7 +261,7 @@ PRODUCT_PACKAGES += \
     libbatching \
     libgeofencing \
     libgnss \
-    libwifi-hal-ctrl
+    libwifi-hal-bcm
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
@@ -293,28 +293,22 @@ PRODUCT_PACKAGES += \
     charger.fstab.qcom \
     fstab.qcom \
     init.qcom.rc \
-    init.qcom.power.rc \
     init.qcom.usb.rc \
     init.htc_multisim.rc \
-    init.htc_oce_fp.rc \
     init.common.nanohub.rc \
     init.htc.usb.configfs.rc \
-    init.htc.usb.rc \
     init.msm.usb.configfs.rc \
+    init.htc.usb.rc \
     init.qcom.usb.sh \
-    init.qcom.sensors.sh \
     init.qcom.sh \
     init.htc.fp.sh \
-    init.htc.post_boot.sh \
-    init.htc.slpi.sh \
-    init.htc_oce.fp.rc \
     init.qcom.early_boot.sh \
     init.qcom.post_boot.sh \
-    init.qcom.firmware_links.sh \
-    init.usbdiag.sh \
-    init.foreground.sh \
     init.recovery.qcom.rc \
+    init.foreground.sh \
     init.target.rc \
+    init.oce.rc \
+    init.qcom.power.rc \
     ueventd.qcom.rc
 
 # Input
