@@ -173,6 +173,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.baseband.arch=msm \
     ro.telephony.call_ring.multiple=false \
     ro.ril.telephony.mqanelements=5 \
+    persist.vendor.radio.aosp_usr_pref_sel=true \
     persist.vendor.radio.apm_sim_not_pwdn=0 \
     persist.vendor.radio.apm_mdm_not_pwdn=1 \
     persist.vendor.radio.cs_srv_type=1 \
