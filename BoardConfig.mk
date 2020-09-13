@@ -236,7 +236,8 @@ BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy-minimal/vendor
 TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib64/libril.so|/system/vendor/lib64/libshim_ril.so \
     /system/vendor/lib/hw/camera.msm8996.so|/system/vendor/lib/libshim_camera.so \
-    /system/vendor/lib/libmmcamera_stillmore_lib.so|/system/vendor/lib/libshim_stillmore.so
+    /system/vendor/lib/libmmcamera_stillmore_lib.so|/system/vendor/lib/libshim_stillmore.so \
+    /system/product/lib64/libdpmframework.so|libcutils_shim.so
 
 # Thermal
 USE_DEVICE_SPECIFIC_THERMAL := true    

@@ -468,6 +468,7 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     librmnetctl \
     libshim_ril \
+    libcutils_shim \
     libxml2
 
 # Seccomp
