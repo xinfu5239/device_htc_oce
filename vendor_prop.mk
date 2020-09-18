@@ -112,7 +112,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_rotator_downscale=1 \
     ro.sf.lcd_density=640 \
     vendor.display.perf_hint_window=50 \
-    vendor.display.disable_skip_validate=1
+    vendor.display.disable_skip_validate=1 \
+    ro.surface_flinger.supports_background_blur=1
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
