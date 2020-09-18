@@ -229,7 +229,7 @@ TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 TARGET_USES_OLD_MNC_FORMAT := true
 
 # SELinux
--include device/qcom/sepolicy-legacy-um/sepolicy.mk
+-include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy-minimal/vendor
 
 # SHIMS
