@@ -612,7 +612,7 @@ vendor/bin/lowi-server|18140d8c4fe8965755ebc289d9b0b3a3347c219a
 vendor/bin/slim_daemon|4f2737be7f8715b4ed9f43dbb3f03889ed9ca5c7
 vendor/bin/xtra-daemon|e2746de081f89ff3cb4caebbba9a3d81e53ebfbd
 vendor/etc/cacert_location.pem|0789bf799c7e45d352a83e2f79ddb0cea86db85b
-vendor/etc/vintf/manifest/vendor.qti.gnss@3.0-service.xml|9b2f6691d6c224bcb9ab9a0d57adfb9e52f1b53e
+-vendor/etc/vintf/manifest/vendor.qti.gnss@3.0-service.xml|9b2f6691d6c224bcb9ab9a0d57adfb9e52f1b53e
 vendor/etc/xtra_root_cert.pem|f55a31ec4d9cf8ce2724acadecf00c779f8767db
 vendor/lib64/hw/vendor.qti.gnss@3.0-impl.so|9fad52ca1637d7479302468e20d105cf121d2658
 vendor/lib64/libdataitems.so|854b345c503327addc4a82bfb2294de261a79048
