@@ -216,8 +216,8 @@ PRODUCT_PACKAGES += \
     libtinyxml
 
 # Doze
-PRODUCT_PACKAGES += \
-    HTCDoze
+#PRODUCT_PACKAGES += \
+#    HTCDoze
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -238,8 +238,8 @@ PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service.oce
 
 # FlipFlap
-PRODUCT_PACKAGES += \
-    FlipFlap
+#PRODUCT_PACKAGES += \
+#    FlipFlap
 
 # fwk-detect
 PRODUCT_PACKAGES += \
@@ -493,8 +493,8 @@ PRODUCT_PACKAGES += \
     qti-telephony-utils \
     qti_telephony_utils.xml
 
-PRODUCT_BOOT_JARS += \
-    telephony-ext
+#PRODUCT_BOOT_JARS += \
+#    telephony-ext
 
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
