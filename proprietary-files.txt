@@ -917,8 +917,8 @@ vendor/lib64/libqmiservices.so
 vendor/lib64/libqmiservices_ext.so
 vendor/lib64/libsmemlog.so
 
-# Radio - from daisy - xiaomi/daisy/daisy_sprout:10/QKQ1.191002.002/V11.0.7.0.QDLMIXM
-product/framework/qti-telephony-common.jar|11d6b89b31a9bf65218b3676c2bbd296275b1932
+# Radio qti-telephony-common | Xiaomi cmi qssi-user-11-RKQ1.200710.002-V12.1.2.0.RJACNXM
+system_ext/framework/qti-telephony-common.jar|98951c48563c5846a58c9a3c4c254f32d0741f36
 
 # Radio
 vendor/bin/netmgrd
