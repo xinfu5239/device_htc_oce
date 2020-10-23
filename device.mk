@@ -216,8 +216,8 @@ PRODUCT_PACKAGES += \
     libtinyxml
 
 # Doze
-#PRODUCT_PACKAGES += \
-#    HTCDoze
+PRODUCT_PACKAGES += \
+    HTCDoze
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -242,8 +242,8 @@ PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service.oce
 
 # FlipFlap
-#PRODUCT_PACKAGES += \
-#    FlipFlap
+PRODUCT_PACKAGES += \
+    FlipFlap
 
 # fwk-detect
 PRODUCT_PACKAGES += \
