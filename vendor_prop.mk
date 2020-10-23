@@ -229,6 +229,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.direct.interface=p2p-dev-wlan0
 
+# USB
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.usb.use_gadget_hal=true
+
 # Misc
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
