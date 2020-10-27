@@ -113,8 +113,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=640 \
     vendor.display.perf_hint_window=50 \
     vendor.display.disable_skip_validate=1 \
-    ro.surface_flinger.supports_background_blur=1 \
-    ro.sf.blurs_are_expensive=1
+    ro.surface_flinger.supports_background_blur=1
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
